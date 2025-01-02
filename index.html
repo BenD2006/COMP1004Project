@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lan='en'>
+<head>
+    <link rel="stylesheet" href="styles.css">
+    <title>Password Management System</title>
+    <link rel="icon" href="favicon.ico" type="image/x-icon">
+</head>
+<body class = "highlight">
+    <h1 id = "main-title">Welcome to the password management system</h1>
+    <div style="margin-bottom: 30px;">
+        <p>This system will allow you to save and generate passwords for any websites you use.</p>
+    </div>
+    <div class="savewindow">
+        <h2>Save Password</h2>
+        <p>Use this area to save a password to the password storage</p>
+        <form> 
+            <br><br><label for="webpage">Webpage Name:</label><br>
+            <input type="text" id="webpage" name="webpage" value=""style="width: 500px; height:25px;"><br>
+            <label for="username">Username/Email:</label><br>
+            <input type="text" id="username" name="username" value=""style="width: 500px; height:25px;"><br>
+            <label for="password">Password:</label><br>
+            <input type="text" id="password" name="password" value="" style="width: 500px; height:25px;"><br><br><br>
+            <input type="submit" value="Submit"style="height: 40px; width: 500px;">
+        </form>
+    </div>    
+    <div class="showpassword">
+        <h2>Passwords Saved</h2> <br>
+        <table border="1" style="width: 100%">
+            <tr>
+                <th style="width: 75px;">Website</th>
+                <th style="width: 75px">Password</th>
+            </tr>
+            <tr>
+                <td></td>
+                <td></td>
+            </tr>
+        </table>
+    </div>
+    <br>
+    <div class="generatepassword">
+        <h2>Password Generator</h2>
+        <form>
+            <br><br><label for="numofchar">Number Of Characters: </label>
+            <input type="number" id="numofchar" name="numofchar" value="" style="width: 200px; height:25px;"><br>
+            <input type="checkbox" id="char" name="char" value="">
+            <label for="char">Upper and Lower Case Characters</label><br><br>
+            <input type="checkbox" id="num" name="num" value="">
+            <label for="num">Numbers</label><br><br>
+            <input type="checkbox" id="sym" name="sym" value="">
+            <label for="sym">Symbols</label><br><br>
+        </form>
+    </div>
+
+</body>
+</html>
