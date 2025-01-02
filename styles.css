@@ -54,6 +54,16 @@ div.generatepassword {
     border: 3px solid yellow;
     padding: 10px;
 }
+
+div.checkuserpassword {
+    font-family:"Verdana";
+    position:relative;
+    top:100px;
+    right:0px;
+    border: 3px solid greenyellow;
+    padding: 10px;
+}
+
 /* ID Selector */
 #main-title {
 font-family: "Verdana";
