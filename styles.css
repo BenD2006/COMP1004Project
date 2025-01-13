@@ -76,3 +76,33 @@ background-repeat: no-repeat;
 background-position: center;
 background-attachment: fixed;
 }
+
+.login-box {
+    max-width: 250px;
+    margin: 0 auto;
+    text-align: center;
+}
+input {
+    padding: 10px;
+    margin-top: 25px;
+    border: none;
+    border-radius: 10px;
+    background: transparent;
+    border: 1px solid blue;
+    color: #fff;
+    font-size: 15px;
+}
+button {
+    background: #fff;
+    color: black;
+    padding: 10px;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    margin-top: 15px;
+}
+button:hover {
+    background: transparent;
+    color: white;
+    outline: 1px solid #fff;
+}
