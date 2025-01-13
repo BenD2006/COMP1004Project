@@ -6,20 +6,25 @@
     <link rel="icon" href="favicon.ico" type="image/x-icon">
 </head>
 <body class = "highlight">
-    
-    <div>
-        <div class="login-box">
-            <h2>Login</h2>
-            <form action="#" method="POST">
-                <input type="text" id="username" name="username" required placeholder="Username">
-                <input type="password" id="password" name="password" required placeholder="Password">
-                <div class="options">
-                </div>
-                <button type="submit">Login</button>
-            </form>
-        </div>
-    </div>
+    <button class="loginbutton" onclick="document.getElementById('loginWindow').style.display='inline'">Login</button>
 
+    <div id="loginWindow" class="modal">
+      <button onclick="document.getElementById('loginWindow').style.display='none'"
+    class="close" title="Close Login Page">Close</button>
+    
+      <form class="modal-content" action="#">
+    
+        <div class="container">
+          <label for="username"><b>Username</b></label>
+          <input type="text" placeholder="" name="username" required>
+    
+          <label for="password"><b>Password</b></label>
+          <input type="password" placeholder="" name="password" required>
+    
+          <button type="submit">Login</button>
+        </div>
+      </form>
+    </div>
 
     <h1 id = "main-title">Welcome to the password management system</h1>
 
