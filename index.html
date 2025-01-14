@@ -27,7 +27,7 @@
     </div>
 
     <h1 id = "main-title">Welcome to the password management system</h1>
-
+    <div id="main-page">
     <div style="margin-bottom: 0px;">
         <p>This system will allow you to save and generate passwords for any websites you use.</p>
     </div>
@@ -83,10 +83,21 @@
         <p>Use this to check if a password created meets the basic requirements of a good password</p>
         <form>
             <br><br><label for="userpass">User Made Password: </label>
-            <input type="text" id="userpass" name="userpass" value="" style="width: 200px; height:25px;">
-            <button type="submit" style="height: 25px; width: 50px;">Submit</button>
+            <input type="password" id="userpass" name="userpass" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Password must contain at least 8 characters, a number, an uppercase letter and a lowercase letter" value="" style="width: 200px; height:25px;">
         </form>
+        <div id="passwordmessage">
+            <h3>Any passwords must contain the following:</h3>
+            <c id="length" class="invalid">8 Characters</c><br>
+            <c id="lowercase" class="invalid">A Lowercase Letter</c><br>
+            <c id="uppercase" class="invalid">An Uppercase Letter</c><br>
+            <c id="number" class="invalid">A Number</c>
+        </div>
+        <div id=passwordmeetsmessage>
+            <h3>This password meets the requirements of a good password</h3>
+        </div>
+        <script src="script.js"></script> 
 
+    </div>
     </div>
 </body>
 </html>

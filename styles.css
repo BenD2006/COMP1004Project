@@ -63,8 +63,24 @@ div.checkuserpassword {
     border: 3px solid greenyellow;
     padding: 10px;
 }
+#passwordmessage {
+    background: #f1f1f1;
+    color: #000;
+    position: relative;
+    padding: 20px;
+    margin-top: 10px;
+}
+#passwordmeetsmessage {
+    display: none;
+}
+.valid {
+    color:greenyellow;
+}
 
-/* ID Selector */
+.invalid {
+    color:red;
+}
+
 #main-title {
 font-family: "Verdana";
 color:black;
@@ -149,4 +165,6 @@ button:hover {
     color: white;
     cursor: pointer;
   }
+
+
   
