@@ -5,6 +5,7 @@ var uppercaseLetter = document.getElementById("uppercase");
 var numberUsed = document.getElementById("number");
 var savedUsername = "admin";
 var savedPassword = "password";
+var credentialsToStore = [];
 
 
 function login() {
@@ -30,6 +31,26 @@ function generatePassword() {
     var passwordLength = document.getElementById("numofchar").value;
     var chars = document.getElementById("char");
     alert(chars)
+}
+
+class password {
+    constructor(website, user, password) {
+        this.website = website;
+        this.user = user;
+        this.password = password;
+    }
+
+
+}
+function savePassword() {
+    var websiteName = document.getElementById("webpage").value;
+    var userName = document.getElementById("username").value;
+    var passwordToStore = document.getElementById("password").value;
+
+    credentialsToStore.push({websiteName, userName, password: passwordToStore})
+    localStorage.setItem(websiteName, JSON.stringify(credentialsToStore))
+
+
 }
 
 passwordInputted.onkeyup = function() {
