@@ -6,26 +6,28 @@
     <link rel="icon" href="favicon.ico" type="image/x-icon">
 </head>
 <body class = "highlight">
-    <button class="loginbutton" onclick="document.getElementById('loginWindow').style.display='inline'">Login</button>
+
+    <button class="logoutbutton" onclick="document.getElementById('loginWindow').style.display='inline'">Log Out</button>
 
     <div id="loginWindow" class="modal">
-      <button onclick="document.getElementById('loginWindow').style.display='none'"
-    class="close" title="Close Login Page">Close</button>
-    
+      <h1>Welcome to the password management system</h1>
+      <h2>Please Login using your username and password</h2>
       <form class="modal-content" action="#">
     
         <div class="container">
-          <label for="username"><b>Username</b></label>
-          <input type="text" placeholder="" name="username" required>
+          <label for="login-username"><b>Username</b></label>
+          <input type="text" placeholder="" id="login-username" required> <br>
     
-          <label for="password"><b>Password</b></label>
-          <input type="password" placeholder="" name="password" required>
+          <label for="login-password"><b>Password</b></label>
+          <input type="password" placeholder="" id="login-password" required>
     
-          <button type="submit">Login</button>
+          <br><br><button onclick=login() style="height: 40px; width: 300px;">Login</button>
         </div>
       </form>
     </div>
 
+
+    <div id="page" style="display:none">
     <h1 id = "main-title">Welcome to the password management system</h1>
     <div id="main-page">
     <div style="margin-bottom: 0px;">
@@ -73,7 +75,7 @@
             <label for="num">Numbers</label><br><br>
             <input type="checkbox" id="sym" name="sym" value="">
             <label for="sym">Symbols</label><br><br>
-            <button type="submit" style="height: 40px; width: 500px;">Submit</button>
+            <button onclick=generatePassword() type="submit" style="height: 40px; width: 500px;">Submit</button>
         </form>
     </div>
 
@@ -97,6 +99,7 @@
         </div>
         <script src="script.js"></script> 
 
+    </div>
     </div>
     </div>
 </body>

@@ -3,6 +3,34 @@ var lengthOfPass = document.getElementById("length");
 var lowercaseLetter = document.getElementById("lowercase");
 var uppercaseLetter = document.getElementById("uppercase");
 var numberUsed = document.getElementById("number");
+var savedUsername = "admin";
+var savedPassword = "password";
+
+
+function login() {
+    var usernameInputted = document.getElementById("login-username").value;
+    var passwordInputted = document.getElementById("login-password").value;
+    var usernameCorrect = false;
+    var passwordCorrect = false;
+    if (usernameInputted === savedUsername) {
+        usernameCorrect = true;
+    }
+    if (passwordInputted === savedPassword) {
+        passwordCorrect = true;
+    }
+    if (usernameCorrect == true && passwordCorrect == true) {
+        document.getElementById("loginWindow").style.display = "none";
+        document.getElementById("page").style.display = "inline";
+    } else {
+        alert("Either your username or password is incorrect, please try again");
+    }
+}
+
+function generatePassword() {
+    var passwordLength = document.getElementById("numofchar").value;
+    var chars = document.getElementById("char");
+    alert(chars)
+}
 
 passwordInputted.onkeyup = function() {
     var length = passwordInputted.value.length;

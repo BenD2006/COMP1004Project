@@ -14,8 +14,13 @@ text-align: center;
     
 /* Element Selector */
 h1 {
-font-size: 2.6em;
-text-align: center;
+    font-family: "Verdana";
+    font-size: 2.6em;
+    text-align: center;
+}
+h2 {
+    font-family: "Verdana";
+    text-align:center;
 }
     
 /* Class Selector */
@@ -64,7 +69,7 @@ div.checkuserpassword {
     padding: 10px;
 }
 #passwordmessage {
-    background: #f1f1f1;
+    background: transparent;
     color: #000;
     position: relative;
     padding: 20px;
@@ -122,14 +127,14 @@ button:hover {
     color: yellow;
     outline: 1px solid #fff;
 }
-.loginbutton {
+.logoutbutton {
     position:absolute;
-    top:0px;
-    right:0px;
+    top:10px;
+    right:30px;
 }
 
 .modal {
-    display: none;
+    display: inline;
     position: fixed;
     z-index: 1;
     left: 0;
@@ -143,28 +148,14 @@ button:hover {
   }
   
   .modal-content {
-    background-color: #54f7a8;
     margin: 20px auto;
-    border: 1px solid #888;
-    width: 60%;
+    border: 1px solid red;
+    border-radius: 20px;
+    width: 40%;
     text-align: center;
     padding-bottom: 20px;
   }
   
-  .close {
-    position: absolute;
-    right: 25px;
-    top: 0;
-    color: red;
-    font-family:Verdana;
-    font-size: 15px;
-  }
-
-  .close:hover,
-  .close:focus {
-    color: white;
-    cursor: pointer;
-  }
 
 
   
