@@ -28,11 +28,34 @@ function login() {
 }
 
 function generatePassword() {
+    const baseChars = "abcdefghijklmnopqrstuvwxyz";
+    var charsToUse = "abcdefghijklmnopqrstuvwxyz";
+    const uppercaseCharacters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+    const numericCharacters = "0123456789";
+    const symbolCharacters = "!£$%^&*()[]{}'@#~;:/?";
     var passwordLength = document.getElementById("numofchar").value;
-    var specialChar = document.getElementById("sym");
-    var characters = document.getElementById("char");
-    var numbers = document.getElementById("num");
-    alert(passwordLength);
+    var specialChar = document.getElementById("sym").checked;
+    var upChar = document.getElementById("uchar").checked;
+    var numbers = document.getElementById("num").checked;
+    var generatedPassword = "";
+    if (specialChar == true) {
+        charsToUse += symbolCharacters;
+    }
+    if (upChar == true) {
+        charsToUse += uppercaseCharacters;
+    }
+    if (numbers == true) {
+        charsToUse += numericCharacters;
+    }
+    for (i=0;i < passwordLength; i++) {
+        charToAdd = charsToUse[Math.floor(Math.random() * charsToUse.length)];
+        generatedPassword += charToAdd;
+    }
+    var outputText = document.getElementById("passwordgen");
+    var passwordGenerated = document.createTextNode(generatedPassword);
+    outputText.appendChild(passwordGenerated);
+    document.getElementById("passwordgen").style.display = "inline";
+    charsToUse = "abcdefghijklmnopqrstuvwxyz";
 }
 
 class password {
@@ -51,6 +74,7 @@ function savePassword() {
 
     credentialsToStore.push({websiteName, userName, password: passwordToStore})
     localStorage.setItem(websiteName, JSON.stringify(credentialsToStore))
+    alert("Password Sucessfully Stored");
 
 
 }

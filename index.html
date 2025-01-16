@@ -69,14 +69,15 @@
         <form>
             <br><label for="numofchar">Number Of Characters: </label>
             <input type="number" id="numofchar" name="numofchar" value="" style="width: 200px; height:25px;"><br>
-            <input type="checkbox" id="char" name="char" value="">
-            <label for="char">Upper and Lower Case Characters</label><br><br>
+            <input type="checkbox" id="uchar" name="char" value="">
+            <label for="uchar">Upper Case Characters</label><br><br>
             <input type="checkbox" id="num" name="num" value="">
             <label for="num">Numbers</label><br><br>
             <input type="checkbox" id="sym" name="sym" value="">
             <label for="sym">Symbols</label><br><br>
             <button onclick=generatePassword() type="button" style="height: 40px; width: 500px;">Submit</button>
         </form>
+        <h3 id=passwordgen style="display:none">Password Generated: </h3>
     </div>
 
 
