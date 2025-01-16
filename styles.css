@@ -79,7 +79,7 @@ div.checkuserpassword {
     display: none;
 }
 .valid {
-    color:greenyellow;
+    color:green;
 }
 
 .invalid {

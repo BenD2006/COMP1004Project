@@ -29,8 +29,10 @@ function login() {
 
 function generatePassword() {
     var passwordLength = document.getElementById("numofchar").value;
-    var chars = document.getElementById("char");
-    alert(chars)
+    var specialChar = document.getElementById("sym");
+    var characters = document.getElementById("char");
+    var numbers = document.getElementById("num");
+    alert(passwordLength);
 }
 
 class password {
@@ -59,6 +61,7 @@ passwordInputted.onkeyup = function() {
     var capsVal = false;
     var lowerVal = false;
     var numVal = false;
+    var symbolVal = false;
     if (length >=8) {
         lengthOfPass.classList.remove("invalid");
         lengthOfPass.classList.add("valid");
@@ -90,12 +93,21 @@ passwordInputted.onkeyup = function() {
     if (passwordInputted.value.match(numbers)) {
         number.classList.remove("invalid");
         number.classList.add("valid");
-        numsVal = true;
+        numVal = true;
     } else {
         number.classList.remove("valid");
         number.classList.add("invalid");
     }
-    if (numsVal == true && capsVal == true && lowerVal == true && lengthVal == true) {
+    var symbols = /[*[@$! %*?&£&]/g;
+    if (passwordInputted.value.match(symbols)) {
+        special.classList.remove("invalid");
+        special.classList.add("valid");
+        symbolVal = true;
+    } else {
+        special.classList.remove("valid");
+        special.classList.add("invalid");
+    }
+    if (numVal == true && capsVal == true && lowerVal == true && lengthVal == true && symbolVal == true) {
         document.getElementById('passwordmeetsmessage').style.display='inline'
     } else {
         document.getElementById('passwordmeetsmessage').style.display='none'

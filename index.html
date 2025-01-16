@@ -75,7 +75,7 @@
             <label for="num">Numbers</label><br><br>
             <input type="checkbox" id="sym" name="sym" value="">
             <label for="sym">Symbols</label><br><br>
-            <button onclick=generatePassword() type="submit" style="height: 40px; width: 500px;">Submit</button>
+            <button onclick=generatePassword() type="button" style="height: 40px; width: 500px;">Submit</button>
         </form>
     </div>
 
@@ -85,14 +85,15 @@
         <p>Use this to check if a password created meets the basic requirements of a good password</p>
         <form>
             <br><br><label for="userpass">User Made Password: </label>
-            <input type="password" id="userpass" name="userpass" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Password must contain at least 8 characters, a number, an uppercase letter and a lowercase letter" value="" style="width: 200px; height:25px;">
+            <input type="password" id="userpass" name="userpass" title="Password must contain at least 8 characters, a number, an uppercase letter and a lowercase letter" value="" style="width: 200px; height:20px;">
         </form>
         <div id="passwordmessage">
             <h3>Any passwords must contain the following:</h3>
             <c id="length" class="invalid">8 Characters</c><br>
             <c id="lowercase" class="invalid">A Lowercase Letter</c><br>
             <c id="uppercase" class="invalid">An Uppercase Letter</c><br>
-            <c id="number" class="invalid">A Number</c>
+            <c id="number" class="invalid">A Number</c><br>
+            <c id="special" class="invalid">A Special Character</c>
         </div>
         <div id=passwordmeetsmessage>
             <h3>This password meets the requirements of a good password</h3>
