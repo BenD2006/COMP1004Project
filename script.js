@@ -79,7 +79,7 @@ function savePassword() {
 
 }
 
-passwordInputted.onkeyup = function() {
+passwordInputted.onkeyup = function validatePassword() {
     var length = passwordInputted.value.length;
     var lengthVal = false;
     var capsVal = false;
