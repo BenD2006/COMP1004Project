@@ -7,6 +7,18 @@ var savedUsername = "admin";
 var savedPassword = "password";
 var credentialsToStore = [];
 
+function createAccountWindow() {
+    document.getElementById("createAccount").style.display = "inline";
+}
+
+function createAccount() {
+    var usernameInputted = document.getElementById("login-username-new").value;
+    var passwordInputted = document.getElementById("login-password-new").value;
+    savedUsername = usernameInputted;
+    savedPassword = passwordInputted;
+    alert(savedUsername);
+    document.getElementById("createAccount").style.display = "none";
+}
 
 function login() {
     var usernameInputted = document.getElementById("login-username").value;
@@ -51,22 +63,17 @@ function generatePassword() {
         charToAdd = charsToUse[Math.floor(Math.random() * charsToUse.length)];
         generatedPassword += charToAdd;
     }
-    var outputText = document.getElementById("passwordgen");
-    var passwordGenerated = document.createTextNode(generatedPassword);
-    outputText.appendChild(passwordGenerated);
+    document.getElementById("passwordGenOutput").innerHTML = generatedPassword;
     document.getElementById("passwordgen").style.display = "inline";
+    document.getElementById("passwordGenOutput").style.display = "inline";
     charsToUse = "abcdefghijklmnopqrstuvwxyz";
 }
 
-class password {
-    constructor(website, user, password) {
-        this.website = website;
-        this.user = user;
-        this.password = password;
-    }
-
+function showAllPasswords() {
 
 }
+
+
 function savePassword() {
     var websiteName = document.getElementById("webpage").value;
     var userName = document.getElementById("username").value;
