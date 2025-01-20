@@ -69,8 +69,13 @@ function generatePassword() {
     charsToUse = "abcdefghijklmnopqrstuvwxyz";
 }
 
-function showAllPasswords() {
-
+function showSelectedPassword() {
+    var websiteName = document.getElementById("webpage").value;
+    var dataStored = localStorage.getItem(websiteName);
+    alert(dataStored);
+    dataStored = JSON.parse(dataStored);
+    alert(dataStored);
+    document.getElementById("showpassword").textContent = storedData;
 }
 
 
@@ -79,7 +84,7 @@ function savePassword() {
     var userName = document.getElementById("username").value;
     var passwordToStore = document.getElementById("password").value;
 
-    credentialsToStore.push({websiteName, userName, password: passwordToStore})
+    credentialsToStore.push({websiteName:websiteName, userName:userName, password: passwordToStore})
     localStorage.setItem(websiteName, JSON.stringify(credentialsToStore))
     alert("Password Sucessfully Stored");
 
