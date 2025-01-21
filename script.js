@@ -71,11 +71,12 @@ function generatePassword() {
 
 function showSelectedPassword() {
     var websiteName = document.getElementById("webpage").value;
+    alert(websiteName);
     var dataStored = localStorage.getItem(websiteName);
     alert(dataStored);
-    dataStored = JSON.parse(dataStored);
-    alert(dataStored);
-    document.getElementById("showpassword").textContent = storedData;
+    var dataStoredNew = JSON.parse(dataStored);
+    alert(dataStoredNew);
+    document.getElementById("showpassword").textContent = dataStoredNew;
 }
 
 
@@ -83,7 +84,6 @@ function savePassword() {
     var websiteName = document.getElementById("webpage").value;
     var userName = document.getElementById("username").value;
     var passwordToStore = document.getElementById("password").value;
-
     credentialsToStore.push({websiteName:websiteName, userName:userName, password: passwordToStore})
     localStorage.setItem(websiteName, JSON.stringify(credentialsToStore))
     alert("Password Sucessfully Stored");
