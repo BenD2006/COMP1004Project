@@ -71,15 +71,34 @@ function generatePassword() {
 
 function showSelectedPassword() {
     var websiteName = document.getElementById("webpage").value;
-    alert(websiteName);
     var dataStored = localStorage.getItem(websiteName);
-    alert(dataStored);
-    var dataStoredNew = JSON.parse(dataStored);
-    alert(dataStoredNew);
-    document.getElementById("showpassword").textContent = dataStoredNew;
+    var dataStoredList = JSON.parse(dataStored);
+    var usernameStored;
+    var passwordStored;
+    for (var i = 0; i < dataStoredList.length; i++) {
+        if (dataStoredList[i].websiteName === websiteName) {
+            usernameStored = dataStoredList[i].userName;
+            passwordStored = dataStoredList[i].password;
+            break;
+        }
+    }
+
+    if (usernameStored !== undefined) {
+        alert(usernameStored);
+    } else {
+        alert("Website not found.");
+    }
+    if (passwordStored !== undefined) {
+        alert(passwordStored);
+    } else {
+        alert("Website not found.");
+    }
+    document.getElementById("usernameOutput").innerHTML = usernameStored;
+    document.getElementById("passwordOutput").innerHTML = passwordStored;
+    document.getElementById("usernameOutput").style.display = "inline";
+    document.getElementById("passwordOutput").style.display = "inline";
+
 }
-
-
 function savePassword() {
     var websiteName = document.getElementById("webpage").value;
     var userName = document.getElementById("username").value;
