@@ -8,6 +8,8 @@
 <body class = "highlight">
 
     <button class="logoutbutton" onclick="document.getElementById('loginWindow').style.display='inline'">Log Out</button>
+    <button class="clearbutton" onclick=clearStorage()>Clear Storage</button>
+    <button class="exportbutton" onclick="exportFile()">Export To JSON File</button>
 
     <div id="loginWindow" class="modal">
       <h1>Welcome to the password management system</h1>
@@ -64,9 +66,13 @@
         <h2>Passwords Saved</h2> <br>
         <button onclick=showAllPasswords() type="button" style="height:40px; width:300px;">Show All Passwords Saved</button>
         <button onclick=showSelectedPassword() type="button" style="height:40px; width:300px;">Show Selected Password</button>
-        <input type="text" id="webpage" name="webpage" value="">
-        <d id=usernameOutput style="display:none"></d>
-        <d id=passwordOutput style="display:none"></d>
+        <input type="text" id="webpage" name="webpage" value=""><br>
+        <div id="showpasswordselected">
+            <h3>Username/Email: </h3>
+            <d id=usernameOutput style="display:none"></d><br>
+            <h3>Password: </h3>
+            <d id=passwordOutput style="display:none"></d><br>
+        </div>
         <table id="table" border="1" style="width: 100%; display:none">
             <tr>
                 <th style="width: 75px;">Website</th>

@@ -16,7 +16,6 @@ function createAccount() {
     var passwordInputted = document.getElementById("login-password-new").value;
     savedUsername = usernameInputted;
     savedPassword = passwordInputted;
-    alert(savedUsername);
     document.getElementById("createAccount").style.display = "none";
 }
 
@@ -82,8 +81,7 @@ function showSelectedPassword() {
             break;
         }
     }
-
-    if (usernameStored !== undefined) {
+    if (usernameStored == undefined) {
         alert(usernameStored);
     } else {
         alert("Website not found.");
@@ -110,6 +108,9 @@ function savePassword() {
 
 }
 
+function clearStorage() {
+    localStorage.clear();
+}
 passwordInputted.onkeyup = function validatePassword() {
     var length = passwordInputted.value.length;
     var lengthVal = false;
