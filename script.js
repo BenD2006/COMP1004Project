@@ -3,8 +3,8 @@ var lengthOfPass = document.getElementById("length");
 var lowercaseLetter = document.getElementById("lowercase");
 var uppercaseLetter = document.getElementById("uppercase");
 var numberUsed = document.getElementById("number");
-var savedUsername = "admin";
-var savedPassword = "password";
+//var savedUsername = "admin";
+//var savedPassword = "password";
 var credentialsToStore = [];
 
 function createAccountWindow() {
@@ -14,14 +14,23 @@ function createAccountWindow() {
 function createAccount() {
     var usernameInputted = document.getElementById("login-username-new").value;
     var passwordInputted = document.getElementById("login-password-new").value;
-    savedUsername = usernameInputted;
-    savedPassword = passwordInputted;
+    var loginCredentials = [];
+    loginCredentials.push({username:usernameInputted, password:passwordInputted});
+    localStorage.setItem("loginUser", JSON.stringify(loginCredentials));
+    //savedUsername = usernameInputted;
+    //savedPassword = passwordInputted;
     document.getElementById("createAccount").style.display = "none";
 }
 
 function login() {
     var usernameInputted = document.getElementById("login-username").value;
     var passwordInputted = document.getElementById("login-password").value;
+    var savedloginData = JSON.parse(localStorage.getItem("loginUser"))
+    for (var i = 0; i < savedloginData.length; i++) {
+            var savedUsername = savedloginData[i].username;
+            var savedPassword = savedloginData[i].password;
+            break;
+    }
     var usernameCorrect = false;
     var passwordCorrect = false;
     if (usernameInputted === savedUsername) {
@@ -97,12 +106,16 @@ function showSelectedPassword() {
     document.getElementById("passwordOutput").style.display = "inline";
 
 }
+
+function showAllPasswords() {
+    
+}
 function savePassword() {
     var websiteName = document.getElementById("webpage").value;
     var userName = document.getElementById("username").value;
     var passwordToStore = document.getElementById("password").value;
-    credentialsToStore.push({websiteName:websiteName, userName:userName, password: passwordToStore})
-    localStorage.setItem(websiteName, JSON.stringify(credentialsToStore))
+    credentialsToStore.push({websiteName:websiteName, userName:userName, password: passwordToStore});
+    localStorage.setItem(websiteName, JSON.stringify(credentialsToStore));
     alert("Password Sucessfully Stored");
 
 
