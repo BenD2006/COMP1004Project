@@ -3,8 +3,6 @@ var lengthOfPass = document.getElementById("length");
 var lowercaseLetter = document.getElementById("lowercase");
 var uppercaseLetter = document.getElementById("uppercase");
 var numberUsed = document.getElementById("number");
-//var savedUsername = "admin";
-//var savedPassword = "password";
 var credentialsToStore = [];
 
 function createAccountWindow() {
@@ -15,10 +13,8 @@ function createAccount() {
     var usernameInputted = document.getElementById("login-username-new").value;
     var passwordInputted = document.getElementById("login-password-new").value;
     var loginCredentials = [];
-    loginCredentials.push({username:usernameInputted, password:passwordInputted});
+    loginCredentials.push({websiteName:"pms", userName:usernameInputted, password:passwordInputted});
     localStorage.setItem("loginUser", JSON.stringify(loginCredentials));
-    //savedUsername = usernameInputted;
-    //savedPassword = passwordInputted;
     document.getElementById("createAccount").style.display = "none";
 }
 
@@ -27,7 +23,7 @@ function login() {
     var passwordInputted = document.getElementById("login-password").value;
     var savedloginData = JSON.parse(localStorage.getItem("loginUser"))
     for (var i = 0; i < savedloginData.length; i++) {
-            var savedUsername = savedloginData[i].username;
+            var savedUsername = savedloginData[i].userName;
             var savedPassword = savedloginData[i].password;
             break;
     }
@@ -91,12 +87,12 @@ function showSelectedPassword() {
         }
     }
     if (usernameStored == undefined) {
-        alert(usernameStored);
+        //alert(usernameStored);
     } else {
         alert("Website not found.");
     }
     if (passwordStored !== undefined) {
-        alert(passwordStored);
+        //alert(passwordStored);
     } else {
         alert("Website not found.");
     }
@@ -108,12 +104,31 @@ function showSelectedPassword() {
 }
 
 function showAllPasswords() {
-    
+    document.getElementById('table').style.display='inline';
+    var table = document.getElementById('table');
+    console.log(localStorage.length);
+    for (i=0; i <= localStorage.length; i++) {
+        console.log(i);
+        var key = localStorage.key(i);
+        console.log(key);
+        var data = localStorage.getItem(key);
+        console.log(data);
+        var dataParsed = JSON.parse(data);
+        console.log(dataParsed);
+        var newRow = table.insertRow();
+        var cella = newRow.insertCell();
+        var cellb = newRow.insertCell();
+        var cellc = newRow.insertCell();
+        cella.innerHTML = dataParsed[0].websiteName;
+        cellb.innerHTML = dataParsed[0].userName;
+        cellc.innerHTML = dataParsed[0].password
+    }
 }
 function savePassword() {
     var websiteName = document.getElementById("webpage").value;
     var userName = document.getElementById("username").value;
     var passwordToStore = document.getElementById("password").value;
+    credentialsToStore = [];
     credentialsToStore.push({websiteName:websiteName, userName:userName, password: passwordToStore});
     localStorage.setItem(websiteName, JSON.stringify(credentialsToStore));
     alert("Password Sucessfully Stored");

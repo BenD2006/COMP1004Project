@@ -48,9 +48,9 @@ div.showpassword {
     border-radius: 20px;
     padding: 10px;
     vertical-align: top;
-    width: 978px;
-    height: 250px;
-    overflow: hidden;
+    /*width: 978px;
+    height: 250px;*/
+    /*overflow: hidden;*/
 }
 
 div.generatepassword {
@@ -71,6 +71,10 @@ div.checkuserpassword {
     border: 3px solid greenyellow;
     border-radius: 20px;
     padding: 10px;
+}
+div.tablepasswords {
+    top:100px;
+    left:90px;
 }
 #passwordmessage {
     background: transparent;
@@ -101,6 +105,7 @@ background-repeat: no-repeat;
 background-position: center;
 background-attachment: fixed;
 }
+
 
 .login-box {
     max-width: 250px;
@@ -163,8 +168,6 @@ button:hover {
   
   .modal-content {
     margin: 20px auto;
-    border: 1px solid red;
-    border-radius: 20px;
     width: 40%;
     text-align: center;
     padding-bottom: 20px;
