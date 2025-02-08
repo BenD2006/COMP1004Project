@@ -10,6 +10,11 @@
     <button class="logoutbutton" onclick="document.getElementById('loginWindow').style.display='inline'">Log Out</button>
     <button class="clearbutton" onclick=clearStorage()>Clear Storage</button>
 
+    <button class="savePasswordButton" onclick="document.getElementById('savePasswordWindow').style.display='block'">Save Password To Storage</button>
+    <button class="showPasswordButton" onclick=openShowPassword() >Show Passwords</button>
+    <button class="passwordGenerateButton" onclick="document.getElementById('generatepassword').style.display='block'" >Generate A Password</button>
+    <button class="checkUserPasswordButton" onclick="document.getElementById('checkuserpassword').style.display='block'" >Check a Password</button>
+
     <div id="loginWindow" class="modal">
       <h1>Welcome to the password management system</h1>
       <h2>Please Login using your username and password</h2>
@@ -39,33 +44,20 @@
     </div>
 
 
-    <div id="page" style="display:none">
+    <div id="page" style="display:none;">
     <h1 id = "main-title">Welcome to the password management system</h1>
     <div id="main-page">
     <div style="margin-bottom: 0px;">
         <p>This system will allow you to save and generate passwords for any websites you use.</p>
     </div>
 
-    <div class="savewindow">
-        <h2>Save Password</h2>
-        <p>Use this area to save a password to the password storage</p>
-        <form> 
-            <br><br><label for="webpage">Webpage Name:</label>
-            <input type="text" id="webpage" name="webpage" value=""style="width: 500px; height:25px;"><br><br>
-            <label for="username">Username/Email:</label><br>
-            <input type="text" id="username" name="username" value=""style="width: 500px; height:25px;"><br><br>
-            <label for="password">Password:</label><br>
-            <input type="password" id="password" name="password" value="" style="width: 500px; height:25px;"><br><br><br>
-            <button onclick=savePassword() type="button" style="height: 40px; width: 500px;">Submit</button>
-        </form>
-    </div>   
+
     
-    
-    <div id="showpassword" class="showpassword">
+    <div id="showpassword" class="showpassword" style="display:none;">
         <h2>Passwords Saved</h2> <br>
         <button onclick=showAllPasswords() type="button" style="height:40px; width:300px;">Show All Passwords Saved</button>
         <button onclick=showSelectedPassword() type="button" style="height:40px; width:300px;">Show Selected Password</button>
-        <input type="text" id="webpage" name="webpage" value=""><br>
+        <input type="text" id="webpageShow" name="webpageShow" value=""><br>
         <div id="showpasswordselected">
             <h3>Username/Email: </h3>
             <d id=usernameOutput style="display:none"></d><br>
@@ -73,7 +65,7 @@
             <d id=passwordOutput style="display:none"></d><br>
         </div>
         <div id="tablepasswords">
-        <table id="table" border="1" style="width: 100%; display:none">
+        <table id="table" border="1" style="width: 100%; display:none;">
             <tr>
                 <th style="width: 75px;">Website</th>
                 <th style="width: 75px;">Username</th>
@@ -84,7 +76,7 @@
     </div>
     <br>
 
-    <div class="generatepassword">
+    <div id="generatepassword" class="generatepassword" style="display:none;">
         <h2>Password Generator</h2>
         <form>
             <br><label for="numofchar">Number Of Characters: </label>
@@ -102,7 +94,7 @@
     </div>
 
 
-    <div class="checkuserpassword">
+    <div id="checkuserpassword" class="checkuserpassword" style="display:none">
         <h2>Check User Password</h2>
         <p>Use this to check if a password created meets the basic requirements of a good password</p>
         <form>
@@ -123,7 +115,23 @@
         <script src="script.js"></script> 
 
     </div>
-    </div>
-    </div>
+
+    <div id="savePasswordWindow" class="saveModal" style="display:none">
+        <button id="savemodalclose" onclick="document.getElementById('savePasswordWindow').style.display = 'none'" type="button"">Close</button>
+        <h2>Save Password to Password Storage</h2>
+        <form class="saveModal-content" action="#">
+            <form> 
+                <label for="webpage">Webpage Name:</label> <br>
+                <input type="text" id="webpage" name="webpage" value=""style="width: 500px; height:25px;"><br><br>
+                <label for="username">Username/Email:</label><br>
+                <input type="text" id="username" name="username" value=""style="width: 500px; height:25px;"><br><br>
+                <label for="password">Password:</label><br>
+                <input type="password" id="password" name="password" value="" style="width: 500px; height:25px;"><br><br><br>
+                <button onclick=savePassword() type="button" style="height: 40px; width: 500px;">Submit</button>
+            </form>
+              
+          </div>
+        </form>
+      </div> 
 </body>
 </html>

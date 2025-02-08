@@ -48,10 +48,8 @@ div.showpassword {
     border-radius: 20px;
     padding: 10px;
     vertical-align: top;
-    /*width: 978px;
-    height: 250px;*/
-    /*overflow: hidden;*/
 }
+
 
 div.generatepassword {
     font-family:"Verdana";
@@ -174,5 +172,30 @@ button:hover {
   }
   
 
-
+  .saveModal {
+    display: inline;
+    position: absolute;
+    z-index: 1;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    width: 60%;
+    height: 50%;
+    overflow: auto;
+    background-color: #ffffff;
+    padding-top: 30px;
+    font-family: Verdana;
+  }
   
+  .saveModal-content {
+    margin: 10px;
+    width: 40%;
+    text-align: left;
+    padding-bottom: 10px;
+  }
+  
+#savemodalclose {
+    position:absolute;
+    top:10px;
+    right:10px;
+  }
