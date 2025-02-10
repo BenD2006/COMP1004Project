@@ -208,3 +208,59 @@ passwordInputted.onkeyup = function validatePassword() {
         document.getElementById('passwordmeetsmessage').style.display='none'
     }
 }
+
+async function keyGenerationForEncryption() {
+    var key = await crypto.subtle.generateKey(
+        {
+            name: "AES-GCM",
+            length: 256,
+        },
+        true,
+        ["encrypt","decrypt"]
+    );
+    return key;
+}
+
+async function encrypt(encryption_key, data_to_encrypt) {
+    var data_encoded = new TextEncoder().encode(data_to_encrypt);
+    var iv = window.crypto.getRandomValues(new Uint8Array(12));
+
+    var data_encrypted = await crypto.subtle.encrypt(
+        {
+            name:"AES-GCM",
+            iv:iv,
+        },
+        encryption_key,
+        data_encoded
+    );
+
+    return {
+        iv:iv,
+        encryptedData: data_encrypted
+    };
+}
+
+async function decrypt(encryption_key, encrypted_data, iv) {
+    var decrypted_data = await crypto.subtle.decrypt(
+        {
+            name: "AES-GCM",
+            iv: iv,
+        },
+        encryption_key,
+        encrypted_data
+    );
+
+    return new TextDecoder().decode(decrypted_data);
+}
+
+async function callEncryption() {
+    var key = await keyGenerationForEncryption();
+    var data = "Hello World!";
+
+    var {iv, encryptedData} = await encrypt(key, data);
+    console.log(encryptedData);
+    console.log(new Uint8Array(encryptedData));
+
+    var decryptedData = await decrypt(key, encryptedData, iv);
+    console.log("Decrypted data:", decryptedData);
+}
