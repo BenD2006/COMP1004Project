@@ -134,11 +134,11 @@ function showAllPasswords() {
 }
 function savePassword() {
     var websiteName = document.getElementById("webpage").value;
-    console.log(websiteName);
     var userName = document.getElementById("username").value;
     var passwordToStore = document.getElementById("password").value;
     credentialsToStore = [];
     credentialsToStore.push({websiteName:websiteName, userName:userName, password: passwordToStore});
+    callEncryption()
     localStorage.setItem(websiteName, JSON.stringify(credentialsToStore));
     alert("Password Sucessfully Stored");
     document.getElementById("savePasswordWindow").style.display = "none";
@@ -253,9 +253,9 @@ async function decrypt(encryption_key, encrypted_data, iv) {
     return new TextDecoder().decode(decrypted_data);
 }
 
-async function callEncryption() {
+async function callEncryption(data) {
     var key = await keyGenerationForEncryption();
-    var data = "Hello World!";
+    var data = data;
 
     var {iv, encryptedData} = await encrypt(key, data);
     console.log(encryptedData);
