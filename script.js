@@ -136,9 +136,10 @@ function savePassword() {
     var websiteName = document.getElementById("webpage").value;
     var userName = document.getElementById("username").value;
     var passwordToStore = document.getElementById("password").value;
+    var encryptedpass = callEncryption(passwordToStore);
+    console.log(encryptedpass);
     credentialsToStore = [];
     credentialsToStore.push({websiteName:websiteName, userName:userName, password: passwordToStore});
-    callEncryption()
     localStorage.setItem(websiteName, JSON.stringify(credentialsToStore));
     alert("Password Sucessfully Stored");
     document.getElementById("savePasswordWindow").style.display = "none";
@@ -259,8 +260,11 @@ async function callEncryption(data) {
 
     var {iv, encryptedData} = await encrypt(key, data);
     console.log(encryptedData);
-    console.log(new Uint8Array(encryptedData));
+    var encD = []
+    var uint8Array = new Uint8Array(encryptedData);
+    encD = Array.from(uint8Array);
+    console.log(encD);
 
-    var decryptedData = await decrypt(key, encryptedData, iv);
-    console.log("Decrypted data:", decryptedData);
+    
 }
+
