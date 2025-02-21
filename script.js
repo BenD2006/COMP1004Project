@@ -62,23 +62,27 @@ function generatePassword() {
     var upChar = document.getElementById("uchar").checked;
     var numbers = document.getElementById("num").checked;
     var generatedPassword = "";
-    if (specialChar == true) {
-        charsToUse += symbolCharacters;
+    if (passwordLength <8 || passwordLength >=100) {
+        alert("Password Length is Invalid or Insecure"); 
+    } else {
+        if (specialChar == true) {
+            charsToUse += symbolCharacters;
+        }
+        if (upChar == true) {
+            charsToUse += uppercaseCharacters;
+        }
+        if (numbers == true) {
+            charsToUse += numericCharacters;
+        }
+        for (i=0;i < passwordLength; i++) {
+            charToAdd = charsToUse[Math.floor(Math.random() * charsToUse.length)];
+            generatedPassword += charToAdd;
+        }
+        document.getElementById("passwordGenOutput").innerHTML = generatedPassword;
+        document.getElementById("passwordgen").style.display = "inline";
+        document.getElementById("passwordGenOutput").style.display = "inline";
+        charsToUse = "abcdefghijklmnopqrstuvwxyz";
     }
-    if (upChar == true) {
-        charsToUse += uppercaseCharacters;
-    }
-    if (numbers == true) {
-        charsToUse += numericCharacters;
-    }
-    for (i=0;i < passwordLength; i++) {
-        charToAdd = charsToUse[Math.floor(Math.random() * charsToUse.length)];
-        generatedPassword += charToAdd;
-    }
-    document.getElementById("passwordGenOutput").innerHTML = generatedPassword;
-    document.getElementById("passwordgen").style.display = "inline";
-    document.getElementById("passwordGenOutput").style.display = "inline";
-    charsToUse = "abcdefghijklmnopqrstuvwxyz";
 }
 
 function showSelectedPassword() {
@@ -147,10 +151,38 @@ function savePassword() {
 
 }
 
+function deletePassword() {
+    var websiteName = document.getElementById("deletewebpage").value;
+    if (localStorage.getItem(websiteName) != null) {
+        localStorage.removeItem(websiteName);
+    } else {
+        alert("Not a valid username for a password that is stored");
+    }
+}
+
+function editPassword() {
+    var websiteName = document.getElementById("editwebpage").value;
+    var usernameEdit = document.getElementById("editusername").value;
+    var passwordEdit = document.getElementById("editpassword").value;
+    var passwordStoredToEdit = localStorage.getItem(websiteName);
+    var passwordStoredUnstring = JSON.parse(passwordStoredToEdit);
+    if (usernameEdit == "" || passwordEdit == "") {
+        alert("No Change Made");
+    } else {
+        if (usernameEdit != "") {
+            passwordStoredUnstring.userName = usernameEdit;
+        } 
+        if (passwordEdit != "") {
+            passwordStoredUnstring.userName = usernameEdit;
+        }
+        console.log(passwordStoredUnstring);
+    }
+}
 
 function clearStorage() {
     localStorage.clear();
 }
+
 passwordInputted.onkeyup = function validatePassword() {
     var length = passwordInputted.value.length;
     var lengthVal = false;
@@ -264,6 +296,7 @@ async function callEncryption(data) {
     var uint8Array = new Uint8Array(encryptedData);
     encD = Array.from(uint8Array);
     console.log(encD);
+    decrypt(key,encD)
 
     
 }
