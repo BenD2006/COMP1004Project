@@ -28,16 +28,7 @@ h2 {
 background-color: #d0e0ff;
 padding: 10px;
 }
-    
-div.savewindow {
-    font-family:"Verdana";
-    position: relative;
-    top:50px;
-    left:0px;
-    border: 3px solid blueviolet;
-    border-radius: 20px;
-    padding: 10px;
-}
+
 
 div.showpassword {
     font-family:"Verdana";
@@ -49,7 +40,6 @@ div.showpassword {
     padding: 10px;
     vertical-align: top;
 }
-
 
 div.generatepassword {
     font-family:"Verdana";
@@ -97,14 +87,6 @@ font-family: "Verdana";
 color:black;
 }
     
-body {
-background-color: gray;
-background-repeat: no-repeat;
-background-position: center;
-background-attachment: fixed;
-}
-
-
 .login-box {
     max-width: 250px;
     margin: 0 auto;
@@ -198,8 +180,11 @@ button:hover {
     position:absolute;
     top:10px;
     right:10px;
-  }
+}
 
+.dropbtn {
+    cursor:pointer;
+}
 .dropdown {
     position:relative;
     display:inline-block;
@@ -209,6 +194,7 @@ button:hover {
     position: absolute;
     background-color: #f9f9f9;
     min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
     z-index: 1;
 }
 .dropcont b {
@@ -219,7 +205,10 @@ button:hover {
   
 .dropcont b:hover {background-color: #f1f1f1}
   
-.dropcont .dropcont {
+.dropdown:hover .dropcont {
     display: block;
+  }
+.dropcont:hover .dropbtn {
+    background-color: #3e8e41;
   }
   
