@@ -242,6 +242,10 @@ passwordInputted.onkeyup = function validatePassword() {
     }
 }
 
+function changeBGColour(colour) {
+    document.body.style.background = colour;
+}
+
 async function keyGenerationForEncryption() {
     var key = await crypto.subtle.generateKey(
         {
