@@ -253,7 +253,35 @@ async function keyGenerationForEncryption() {
     );
     return key;
 }
+async function keyDeriveFromPassword(passwordUnencrpt) {
+    const buffer = new TextEncoder().encode(password);
+    const salt = new TextEncoder().encode("mysalt");
+    const keyDerive = await crypto.subtle.importKey(
+        "raw",
+        buffer,
+        "PBKDF2",
+        false,
+        ["deriveBits", "deriveKey"]
+    );
 
+    const key = await crypto.subtle.deriveKey(
+        {
+            name: "PBKDF2",
+            salt: salt,
+            iterations:10000,
+            hash: "SHA-256"
+        },
+        keyDerive,
+        {
+            name: "AES-GCM",
+            length:256
+        },
+        true,
+        ["encrypt", "decrypt"]
+    );
+
+    return key;
+}
 async function encryptAndStore(encryption_key, data_to_encrypt, websiteName) {
     var data_encoded = new TextEncoder()
     var data = data_encoded.encode(data_to_encrypt);
@@ -272,8 +300,8 @@ async function encryptAndStore(encryption_key, data_to_encrypt, websiteName) {
 
 async function decryptFromStore(key, website) {
     var encrypted_data = JSON.parse(localStorage.getItem(website));
-    const iv = new Uint8Array(encrypted_data.iv);
-    var encrypted_array = new Uint8Array(encrypted_data.encrypted);
+    const iv = new Uint8Array(passwordToStoreEncryptIV);
+    var encrypted_array = new Uint8Array(website);
     var decrypted_data = await crypto.subtle.decrypt(
         {
             name: "AES-GCM",
@@ -296,7 +324,26 @@ async function callEncryption(data,website) {
     await encryptAndStore(key, data, website);
 }
 
+async function callEncryptiontest() {
+    var data = "password"
+    var website = "TEST";
+    var key = await keyDeriveFromPassword(website);
+    console.log(key);
+    //var data = data;
+    await encryptAndStore(key, data, website);
+    console.log(passwordToStoreEncrypt);
+    callDecryption();
+}
+
 async function callDecryption(data, website) {
     var decrypted_pass = await decryptFromStore(key, website);
+    return decrypted_pass;
+}
+
+async function callDecryption() {
+    var website = "TEST";
+    var key = await keyDeriveFromPassword(website);
+    var decrypted_pass = await decryptFromStore(key, passwordToStoreEncrypt);
+    console.log(decrypted_pass);
     return decrypted_pass;
 }
