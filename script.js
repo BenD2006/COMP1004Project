@@ -4,6 +4,8 @@ var lowercaseLetter = document.getElementById("lowercase");
 var uppercaseLetter = document.getElementById("uppercase");
 var numberUsed = document.getElementById("number");
 var credentialsToStore = [];
+var passwordToStoreEncryptIV;
+var passwordToStoreEncrypt;
 
 function createAccountWindow() {
     document.getElementById("createAccount").style.display = "inline";
@@ -118,15 +120,10 @@ function showSelectedPassword() {
 function showAllPasswords() {
     document.getElementById('table').style.display='inline';
     var table = document.getElementById('table');
-    console.log(localStorage.length);
     for (i=0; i <= localStorage.length; i++) {
-        console.log(i);
         var key = localStorage.key(i);
-        console.log(key);
         var data = localStorage.getItem(key);
-        console.log(data);
         var dataParsed = JSON.parse(data);
-        console.log(dataParsed);
         var newRow = table.insertRow();
         var cella = newRow.insertCell();
         var cellb = newRow.insertCell();
@@ -136,14 +133,14 @@ function showAllPasswords() {
         cellc.innerHTML = dataParsed[0].password
     }
 }
-function savePassword() {
+async function savePassword() {
     var websiteName = document.getElementById("webpage").value;
     var userName = document.getElementById("username").value;
     var passwordToStore = document.getElementById("password").value;
-    var encryptedpass = callEncryption(passwordToStore);
-    console.log(encryptedpass);
+    console.log("hi");
     credentialsToStore = [];
-    credentialsToStore.push({websiteName:websiteName, userName:userName, password: passwordToStore});
+    await callEncryption(passwordToStore, websiteName);
+    credentialsToStore.push({websiteName:websiteName, userName:userName, iv:passwordToStoreEncryptIV, encryptPass: passwordToStoreEncrypt});
     localStorage.setItem(websiteName, JSON.stringify(credentialsToStore));
     alert("Password Sucessfully Stored");
     document.getElementById("savePasswordWindow").style.display = "none";
@@ -175,7 +172,6 @@ function editPassword() {
         if (passwordEdit != "") {
             passwordStoredUnstring.userName = usernameEdit;
         }
-        console.log(passwordStoredUnstring);
     }
 }
 
@@ -258,50 +254,49 @@ async function keyGenerationForEncryption() {
     return key;
 }
 
-async function encrypt(encryption_key, data_to_encrypt) {
-    var data_encoded = new TextEncoder().encode(data_to_encrypt);
+async function encryptAndStore(encryption_key, data_to_encrypt, websiteName) {
+    var data_encoded = new TextEncoder()
+    var data = data_encoded.encode(data_to_encrypt);
     var iv = window.crypto.getRandomValues(new Uint8Array(12));
-
     var data_encrypted = await crypto.subtle.encrypt(
         {
             name:"AES-GCM",
             iv:iv,
         },
         encryption_key,
-        data_encoded
+        data
     );
-
-    return {
-        iv:iv,
-        encryptedData: data_encrypted
-    };
+    passwordToStoreEncryptIV = Array.from(iv);
+    passwordToStoreEncrypt = Array.from(new Uint8Array(data_encrypted))
 }
 
-async function decrypt(encryption_key, encrypted_data, iv) {
+async function decryptFromStore(key, website) {
+    var encrypted_data = JSON.parse(localStorage.getItem(website));
+    const iv = new Uint8Array(encrypted_data.iv);
+    var encrypted_array = new Uint8Array(encrypted_data.encrypted);
     var decrypted_data = await crypto.subtle.decrypt(
         {
             name: "AES-GCM",
             iv: iv,
         },
-        encryption_key,
-        encrypted_data
+        key,
+        encrypted_array
     );
 
-    return new TextDecoder().decode(decrypted_data);
+    const decoder = new TextDecoder();
+    return decoder.decode(decrypted_data);
 }
 
-async function callEncryption(data) {
+
+async function callEncryption(data,website) {
     var key = await keyGenerationForEncryption();
     var data = data;
+    var website = website;
 
-    var {iv, encryptedData} = await encrypt(key, data);
-    console.log(encryptedData);
-    var encD = []
-    var uint8Array = new Uint8Array(encryptedData);
-    encD = Array.from(uint8Array);
-    console.log(encD);
-    decrypt(key,encD)
-
-    
+    await encryptAndStore(key, data, website);
 }
 
+async function callDecryption(data, website) {
+    var decrypted_pass = await decryptFromStore(key, website);
+    return decrypted_pass;
+}
