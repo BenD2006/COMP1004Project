@@ -87,37 +87,29 @@ function generatePassword() {
     }
 }
 
-function showSelectedPassword() {
-    var websiteName = document.getElementById("webpageShow").value;
-    var dataStored = localStorage.getItem(websiteName);
-    var dataStoredList = JSON.parse(dataStored);
-    var usernameStored;
-    var passwordStored;
-    for (var i = 0; i < dataStoredList.length; i++) {
-        if (dataStoredList[i].websiteName === websiteName) {
-            usernameStored = dataStoredList[i].userName;
-            passwordStored = dataStoredList[i].password;
-            break;
+async function showSelectedPassword() {
+    try{
+        var websiteName = document.getElementById("webpageShow").value;
+        var dataStored = localStorage.getItem(websiteName);
+        if (!dataStored) {
+            throw new Error("No Data");
         }
+        var dataStoredList = JSON.parse(dataStored);
+        var usernameStored;
+        var passwordStored;
+        usernameStored = dataStoredList[0].userName;
+        passwordStored = await callDecryption(websiteName);
+        document.getElementById("usernameOutput").innerHTML = usernameStored;
+        document.getElementById("passwordOutput").innerHTML = passwordStored;
+        document.getElementById("usernameOutput").style.display = "inline";
+        document.getElementById("passwordOutput").style.display = "inline";
+    } catch (error) {
+        alert("No password found");
+        console.error("ERROR OCCURED ", error);
     }
-    if (usernameStored == undefined) {
-        //alert(usernameStored);
-    } else {
-        alert("Website not found.");
-    }
-    if (passwordStored !== undefined) {
-        //alert(passwordStored);
-    } else {
-        alert("Website not found.");
-    }
-    document.getElementById("usernameOutput").innerHTML = usernameStored;
-    document.getElementById("passwordOutput").innerHTML = passwordStored;
-    document.getElementById("usernameOutput").style.display = "inline";
-    document.getElementById("passwordOutput").style.display = "inline";
-
 }
 
-function showAllPasswords() {
+async function showAllPasswords() {
     document.getElementById('table').style.display='inline';
     var table = document.getElementById('table');
     for (i=0; i <= localStorage.length; i++) {
@@ -128,9 +120,10 @@ function showAllPasswords() {
         var cella = newRow.insertCell();
         var cellb = newRow.insertCell();
         var cellc = newRow.insertCell();
+        let password = await callDecryption(dataParsed[0].websiteName);
         cella.innerHTML = dataParsed[0].websiteName;
         cellb.innerHTML = dataParsed[0].userName;
-        cellc.innerHTML = dataParsed[0].password
+        cellc.innerHTML = password
     }
 }
 async function savePassword() {
@@ -144,8 +137,6 @@ async function savePassword() {
     localStorage.setItem(websiteName, JSON.stringify(credentialsToStore));
     alert("Password Sucessfully Stored");
     document.getElementById("savePasswordWindow").style.display = "none";
-
-
 }
 
 function deletePassword() {
@@ -157,20 +148,22 @@ function deletePassword() {
     }
 }
 
-function editPassword() {
+async function editPassword() {
     var websiteName = document.getElementById("editwebpage").value;
     var usernameEdit = document.getElementById("editusername").value;
     var passwordEdit = document.getElementById("editpassword").value;
     var passwordStoredToEdit = localStorage.getItem(websiteName);
     var passwordStoredUnstring = JSON.parse(passwordStoredToEdit);
     if (usernameEdit == "" || passwordEdit == "") {
-        alert("No Change Made");
+        alert("No Changes Have Been Made");
     } else {
         if (usernameEdit != "") {
             passwordStoredUnstring.userName = usernameEdit;
         } 
         if (passwordEdit != "") {
-            passwordStoredUnstring.userName = usernameEdit;
+            let unencryptedPassword = await callDecryption(websiteName);
+            let encryptedPassword = await callEncryption(passwordEdit,websiteName);
+            passwordStoredUnstring.userName = encryptedPassword;
         }
     }
 }
@@ -253,7 +246,7 @@ async function keyGenerationForEncryption() {
     );
     return key;
 }
-async function keyDeriveFromPassword(passwordUnencrpt) {
+async function keyDeriveFromPassword(password) {
     const buffer = new TextEncoder().encode(password);
     const salt = new TextEncoder().encode("mysalt");
     const keyDerive = await crypto.subtle.importKey(
@@ -299,51 +292,42 @@ async function encryptAndStore(encryption_key, data_to_encrypt, websiteName) {
 }
 
 async function decryptFromStore(key, website) {
-    var encrypted_data = JSON.parse(localStorage.getItem(website));
-    const iv = new Uint8Array(passwordToStoreEncryptIV);
-    var encrypted_array = new Uint8Array(website);
-    var decrypted_data = await crypto.subtle.decrypt(
-        {
-            name: "AES-GCM",
-            iv: iv,
-        },
-        key,
-        encrypted_array
-    );
+    try {
+        var encrypted_data_string = localStorage.getItem(website);
+        if (!encrypted_data_string) {
+            throw new Error ("NO DATA");
+        }
+        var encrypted_data = JSON.parse(encrypted_data_string);
+        var ivDecrypt = new Uint8Array(encrypted_data[0].iv);
+        var encrypted_array = new Uint8Array(encrypted_data[0].encryptPass);
+        var decrypted_data = await crypto.subtle.decrypt(
+            {
+                name: "AES-GCM",
+                iv: ivDecrypt,
+            },
+            key,
+            encrypted_array
+        );
 
-    const decoder = new TextDecoder();
-    return decoder.decode(decrypted_data);
+        const decoder = new TextDecoder();
+        let decodedData =  decoder.decode(decrypted_data);
+        return decodedData;
+    } catch (error) {
+        console.error("ERROR OCCURED ", error);
+    }
 }
 
-
-async function callEncryption(data,website) {
-    var key = await keyGenerationForEncryption();
+async function callEncryption(data, website) {
     var data = data;
     var website = website;
-
-    await encryptAndStore(key, data, website);
-}
-
-async function callEncryptiontest() {
-    var data = "password"
-    var website = "TEST";
     var key = await keyDeriveFromPassword(website);
-    console.log(key);
-    //var data = data;
     await encryptAndStore(key, data, website);
     console.log(passwordToStoreEncrypt);
-    callDecryption();
 }
 
-async function callDecryption(data, website) {
-    var decrypted_pass = await decryptFromStore(key, website);
-    return decrypted_pass;
-}
-
-async function callDecryption() {
-    var website = "TEST";
+async function callDecryption(website) {
+    var website = website;
     var key = await keyDeriveFromPassword(website);
-    var decrypted_pass = await decryptFromStore(key, passwordToStoreEncrypt);
-    console.log(decrypted_pass);
+    var decrypted_pass = await decryptFromStore(key, website);
     return decrypted_pass;
 }
