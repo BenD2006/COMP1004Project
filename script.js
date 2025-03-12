@@ -11,11 +11,12 @@ function createAccountWindow() {
     document.getElementById("createAccount").style.display = "inline";
 }
 
-function createAccount() {
+async function createAccount() {
     var usernameInputted = document.getElementById("login-username-new").value;
     var passwordInputted = document.getElementById("login-password-new").value;
     var loginCredentials = [];
-    loginCredentials.push({websiteName:"pms", userName:usernameInputted, password:passwordInputted});
+    await callEncryption(passwordInputted, "loginUser");
+    loginCredentials.push({websiteName:"pms", userName:usernameInputted, iv:passwordToStoreEncryptIV, encryptPass: passwordToStoreEncrypt});
     localStorage.setItem("loginUser", JSON.stringify(loginCredentials));
     document.getElementById("createAccount").style.display = "none";
 }
@@ -28,21 +29,18 @@ function openShowPassword() {
     }
 }
 
-function login() {
+async function login() {
     var usernameInputted = document.getElementById("login-username").value;
     var passwordInputted = document.getElementById("login-password").value;
     var savedloginData = JSON.parse(localStorage.getItem("loginUser"))
-    for (var i = 0; i < savedloginData.length; i++) {
-            var savedUsername = savedloginData[i].userName;
-            var savedPassword = savedloginData[i].password;
-            break;
-    }
-    var usernameCorrect = false;
-    var passwordCorrect = false;
+    let savedPasswordEncrypt = await callDecryption("loginUser") 
+    let savedUsername = savedloginData[0].userName;
+    let usernameCorrect = false;
+    let passwordCorrect = false;
     if (usernameInputted === savedUsername) {
         usernameCorrect = true;
     }
-    if (passwordInputted === savedPassword) {
+    if (passwordInputted === savedPasswordEncrypt) {
         passwordCorrect = true;
     }
     if (usernameCorrect == true && passwordCorrect == true) {
@@ -52,7 +50,9 @@ function login() {
         alert("Either your username or password is incorrect, please try again");
     }
 }
-
+async function forgotPassword() {
+    
+}
 function generatePassword() {
     const baseChars = "abcdefghijklmnopqrstuvwxyz";
     var charsToUse = "abcdefghijklmnopqrstuvwxyz";
@@ -153,12 +153,13 @@ async function editPassword() {
     var usernameEdit = document.getElementById("editusername").value;
     var passwordEdit = document.getElementById("editpassword").value;
     var passwordStoredToEdit = localStorage.getItem(websiteName);
+    alert(passwordStoredToEdit);
     var passwordStoredUnstring = JSON.parse(passwordStoredToEdit);
-    if (usernameEdit == "" || passwordEdit == "") {
+    if (usernameEdit == "" && passwordEdit == "") {
         alert("No Changes Have Been Made");
     } else {
         if (usernameEdit != "") {
-            passwordStoredUnstring.userName = usernameEdit;
+            passwordStoredUnstring[0].userName = usernameEdit;
         } 
         if (passwordEdit != "") {
             let unencryptedPassword = await callDecryption(websiteName);

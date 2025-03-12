@@ -41,6 +41,7 @@
           <input type="password" placeholder="" id="login-password" required>
     
           <br><br><button type="button" onclick=login() style="height: 40px; width: 300px;">Login</button>
+          <br><button type="button" onclick="document.getElementById('forgotpassword').style.display = 'block'" style = "height: 40px; width: 300px;">Forgot Password</button>
           <br><button type="button" onclick=createAccountWindow() style="height: 40px; width: 300px;">Create Account</button>
         </div>
         <div id="createAccount" class="modal" style="display: none;">
@@ -49,7 +50,20 @@
     
                 <label for="login-password-new"><b>Create Password</b></label>
                 <input type="password" placeholder="" id="login-password-new" required>
-            <br><br><button type="button" onclick=createAccount() style="height: 40px; width: 300px;">Login</button>
+                <br><label for="sq1">Security Question 1 - What Primary School Did you attend? </label>
+                <input type="text" id="sq1-answer" required>
+                <br><label for="sq1">Security Question 2 - Set a security number (4 digits) ? </label>
+                <input type="text" id="sq1-answer" required>
+                <br><br><button type="button" onclick=createAccount() style="height: 40px; width: 300px;">Login</button>
+        </div>
+
+        <div id="forgotpassword" class="modal" style="display:none;">
+            <h2>Please answer the security questions</h2>
+            <br><label for="sq1">Security Question 1 - What Primary School Did you attend? </label>
+            <input type="text" id="sq1-answer" required>
+            <br><label for="sq1">Security Question 2 - Set a security number (4 digits) ? </label>
+            <input type="text" id="sq1-answer" required>
+            <br><button type="button" onclick=forgotPassword() style = "height: 40px; width: 300px;">Submit</button>
         </div>
       </form>
     </div>
