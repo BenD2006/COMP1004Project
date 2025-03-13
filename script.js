@@ -8,17 +8,27 @@ var passwordToStoreEncryptIV;
 var passwordToStoreEncrypt;
 
 function createAccountWindow() {
-    document.getElementById("createAccount").style.display = "inline";
+    if (localStorage.getItem("loginUser") != ''){
+        document.getElementById("createAccount").style.display = "inline";
+    } else {
+        alert("User already created");
+    }
 }
 
 async function createAccount() {
-    var usernameInputted = document.getElementById("login-username-new").value;
-    var passwordInputted = document.getElementById("login-password-new").value;
-    var loginCredentials = [];
+    document.getElementById("loginWindow").style.display = "none";
+    let usernameInputted = document.getElementById("login-username-new").value;
+    let passwordInputted = document.getElementById("login-password-new").value;
+    let q1ans = document.getElementById("sq1-answer").value;
+    let q2ans = document.getElementById("sq2-answer").value;
+    let loginCredentials = [];
     await callEncryption(passwordInputted, "loginUser");
-    loginCredentials.push({websiteName:"pms", userName:usernameInputted, iv:passwordToStoreEncryptIV, encryptPass: passwordToStoreEncrypt});
+    let pIv = passwordToStoreEncryptIV;
+    let pEnc = passwordToStoreEncrypt;
+    loginCredentials.push({websiteName:"pms", userName:usernameInputted, iv:pIv, encryptPass:pEnc, q1ans:q1ans, q2ans:q2ans});
     localStorage.setItem("loginUser", JSON.stringify(loginCredentials));
     document.getElementById("createAccount").style.display = "none";
+    document.getElementById("loginWindow").style.display = "inline";
 }
 
 function openShowPassword() {
@@ -50,8 +60,42 @@ async function login() {
         alert("Either your username or password is incorrect, please try again");
     }
 }
-async function forgotPassword() {
+
+function logout() {
+    document.getElementById('loginWindow').style.display='block';
+
     
+
+}
+function forgotPassword() {
+    let resetFlag = false;
+    let q1ansNew = document.getElementById("sq1-answer-fg").value;
+    let q2ansNew = document.getElementById("sq2-answer-fg").value;
+    let credentials = localStorage.getItem("loginUser");
+    let unstringCredentials = JSON.parse(credentials);
+    let q1ans = unstringCredentials[0].q1ans;
+    let q2ans = unstringCredentials[0].q2ans;
+    if (q1ansNew == q1ans && q2ansNew == q2ans) {
+        resetFlag = true;
+    }
+    if (resetFlag == true) {
+        document.getElementById("questions").style.display = "none";
+        document.getElementById("passreset").style.display = "block";
+    }
+
+}
+async function newPassword() {
+    let passwordInputtedNew = document.getElementById("newPass").value;
+    let credentials = localStorage.getItem("loginUser");
+    let unstringCredentials = JSON.parse(credentials);
+    await callEncryption(passwordInputtedNew,"loginUser");
+    unstringCredentials[0].iv = passwordToStoreEncryptIV;
+    unstringCredentials[0].encryptPass =  passwordToStoreEncrypt;
+    localStorage.setItem("loginUser", JSON.stringify(unstringCredentials));
+    document.getElementById("passreset").style.display = "none";
+    document.getElementById("loginWindow").style.display = "none";
+    //document.getElementById("createAccount").style.display = "none";
+    document.getElementById("page").style.display = "inline";
 }
 function generatePassword() {
     const baseChars = "abcdefghijklmnopqrstuvwxyz";
