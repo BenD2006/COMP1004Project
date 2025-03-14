@@ -39,6 +39,7 @@ function openShowPassword() {
     }
 }
 
+
 async function login() {
     var usernameInputted = document.getElementById("login-username").value;
     var passwordInputted = document.getElementById("login-password").value;
