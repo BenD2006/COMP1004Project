@@ -94,7 +94,7 @@ async function newPassword() {
     localStorage.setItem("loginUser", JSON.stringify(unstringCredentials));
     document.getElementById("passreset").style.display = "none";
     document.getElementById("loginWindow").style.display = "none";
-    //document.getElementById("createAccount").style.display = "none";
+    document.getElementById("forgotpassword").style.display = "none";
     document.getElementById("page").style.display = "inline";
 }
 function generatePassword() {
@@ -197,19 +197,33 @@ async function editPassword() {
     var usernameEdit = document.getElementById("editusername").value;
     var passwordEdit = document.getElementById("editpassword").value;
     var passwordStoredToEdit = localStorage.getItem(websiteName);
-    alert(passwordStoredToEdit);
-    var passwordStoredUnstring = JSON.parse(passwordStoredToEdit);
+    alert (usernameEdit);
+    if (!passwordStoredToEdit) {
+        alert("No password stored for this website.");
+        return;
+    }
+
+    var passwordStoredUnstring;
+    try {
+        passwordStoredUnstring = JSON.parse(passwordStoredToEdit);
+    } catch (e) {
+        alert("Error parsing stored password data.");
+        return;
+    }
     if (usernameEdit == "" && passwordEdit == "") {
         alert("No Changes Have Been Made");
     } else {
-        if (usernameEdit != "") {
+        if (!usernameEdit) {
             passwordStoredUnstring[0].userName = usernameEdit;
         } 
         if (passwordEdit != "") {
-            let unencryptedPassword = await callDecryption(websiteName);
-            let encryptedPassword = await callEncryption(passwordEdit,websiteName);
-            passwordStoredUnstring.userName = encryptedPassword;
+            await callEncryption(passwordEdit,websiteName);
+            passwordStoredUnstring[0].iv = passwordToStoreEncryptIV;
+            passwordStoredUnstring[0].encryptPass = passwordToStoreEncrypt
         }
+        passwordStoredToEdit = JSON.stringify(passwordStoredUnstring);
+        alert(passwordStoredToEdit);
+        localStorage.setItem(websiteName, passwordStoredToEdit);
     }
 }
 
