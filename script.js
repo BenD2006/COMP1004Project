@@ -63,9 +63,6 @@ async function login() {
 
 function logout() {
     document.getElementById('loginWindow').style.display='block';
-
-    
-
 }
 function forgotPassword() {
     let resetFlag = false;
@@ -193,38 +190,43 @@ function deletePassword() {
 }
 
 async function editPassword() {
-    var websiteName = document.getElementById("editwebpage").value;
-    var usernameEdit = document.getElementById("editusername").value;
-    var passwordEdit = document.getElementById("editpassword").value;
-    var passwordStoredToEdit = localStorage.getItem(websiteName);
-    alert (usernameEdit);
+    let websiteName = document.getElementById("editwebpage").value;
+    let usernameEdit = document.getElementById("editusername").value;
+    let passwordEdit = document.getElementById("editpassword").value;
+    let passwordStoredToEdit = localStorage.getItem(websiteName);
+    let passwordStoredUnstring;
+
     if (!passwordStoredToEdit) {
         alert("No password stored for this website.");
         return;
     }
-
-    var passwordStoredUnstring;
     try {
         passwordStoredUnstring = JSON.parse(passwordStoredToEdit);
     } catch (e) {
-        alert("Error parsing stored password data.");
+        alert("Error with password data.");
         return;
     }
-    if (usernameEdit == "" && passwordEdit == "") {
-        alert("No Changes Have Been Made");
-    } else {
-        if (!usernameEdit) {
-            passwordStoredUnstring[0].userName = usernameEdit;
-        } 
-        if (passwordEdit != "") {
-            await callEncryption(passwordEdit,websiteName);
-            passwordStoredUnstring[0].iv = passwordToStoreEncryptIV;
-            passwordStoredUnstring[0].encryptPass = passwordToStoreEncrypt
-        }
-        passwordStoredToEdit = JSON.stringify(passwordStoredUnstring);
-        alert(passwordStoredToEdit);
-        localStorage.setItem(websiteName, passwordStoredToEdit);
+    if (!Array.isArray(passwordStoredUnstring) || !passwordStoredUnstring[0] || typeof passwordStoredUnstring[0] !== 'object') {
+        alert("Stored data is not in the expected format.");
+        return;
     }
+
+    if (usernameEdit === "" && passwordEdit === "") {
+        alert("No Changes Have Been Made");
+        return;
+    }
+
+    if (usernameEdit !== "") {
+        passwordStoredUnstring[0].userName = usernameEdit;
+    }
+
+    if (passwordEdit !== "") {
+        await callEncryption(passwordEdit, websiteName);
+        passwordStoredUnstring[0].iv = passwordToStoreEncryptIV;
+        passwordStoredUnstring[0].encryptPass = passwordToStoreEncrypt;
+    }
+    passwordStoredToEdit = JSON.stringify(passwordStoredUnstring);
+    localStorage.setItem(websiteName, passwordStoredToEdit);
 }
 
 function clearStorage() {
