@@ -32,13 +32,12 @@ async function createAccount() {
 }
 
 function openShowPassword() {
-    if (document.getElementById('showpassword').style.display = "none") {
-        document.getElementById('showpassword').style.display = "block";
-    } else if (document.getElementById('showpassword').style.display = "block") {
-        document.getElementById('showpassword').style.display = "none";
+    if (document.getElementById('showPasswordWindow').style.display = "none") {
+        document.getElementById('showPasswordWindow').style.display = "block";
+    } else if (document.getElementById('showPasswordWindow').style.display = "block") {
+        document.getElementById('showPasswordWindow').style.display = "none";
     }
 }
-
 
 async function login() {
     var usernameInputted = document.getElementById("login-username").value;
@@ -199,22 +198,18 @@ async function editPassword() {
 
     if (!passwordStoredToEdit) {
         alert("No password stored for this website.");
-        return;
     }
     try {
         passwordStoredUnstring = JSON.parse(passwordStoredToEdit);
     } catch (e) {
         alert("Error with password data.");
-        return;
     }
     if (!Array.isArray(passwordStoredUnstring) || !passwordStoredUnstring[0] || typeof passwordStoredUnstring[0] !== 'object') {
         alert("Stored data is not in the expected format.");
-        return;
     }
 
     if (usernameEdit === "" && passwordEdit === "") {
         alert("No Changes Have Been Made");
-        return;
     }
 
     if (usernameEdit !== "") {
@@ -228,6 +223,8 @@ async function editPassword() {
     }
     passwordStoredToEdit = JSON.stringify(passwordStoredUnstring);
     localStorage.setItem(websiteName, passwordStoredToEdit);
+    alert("Sucessfully Edited");
+    document.getElementById('editPasswordWindow').style.display='none'
 }
 
 function clearStorage() {

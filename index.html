@@ -95,7 +95,7 @@
           </div>
       </div> 
 
-      <div id="editPasswordWindow" class="saveModal" style="display:none">
+      <div id="editPasswordWindow" class="modal" style="display:none">
         <button id="editmodalclose" onclick="document.getElementById('editPasswordWindow').style.display = 'none'" type="button" >Close</button>
         <h2>Edit a Password</h2>
         <form class="saveModal-content" action="#">
@@ -116,29 +116,6 @@
               
           </div>
       </div> 
-    
-    <div id="showpassword" class="showpassword" style="display:none;">
-        <h2>Passwords Saved</h2> <br>
-        <button onclick=showAllPasswords() type="button" style="height:40px; width:300px;">Show All Passwords Saved</button>
-        <button onclick=showSelectedPassword() type="button" style="height:40px; width:300px;">Show Selected Password</button>
-        <input type="text" id="webpageShow" name="webpageShow" value=""><br>
-        <div id="showpasswordselected">
-            <h3>Username/Email: </h3>
-            <d id=usernameOutput style="display:none"></d><br>
-            <h3>Password: </h3>
-            <d id=passwordOutput style="display:none"></d><br>
-        </div>
-        <div id="tablepasswords">
-        <table id="table" border="1" style="width: 100%; display:none;">
-            <tr>
-                <th style="width: 75px;">Website</th>
-                <th style="width: 75px;">Username</th>
-                <th style="width: 75px">Password</th>
-            </tr>
-        </table>
-        </div>
-    </div>
-    <br>
 
     <div id="generatepassword" class="generatepassword" style="display:none;">
         <h2>Password Generator</h2>
@@ -194,5 +171,30 @@
             </form>
               
           </div>
+
+    <div id="showPasswordWindow" class="showModal" style="display:none">
+        <button id="showmodalclose" onclick="document.getElementById('showPasswordWindow').style.display = 'none'">Exit</button>
+        <h2>Show Passwords Saved</h2>
+        <div id="showpasswords" class="showModalContent">
+        <button onclick=showAllPasswords() type="button" style="height:40px; width:300px;">Show All Passwords Saved</button>
+        <button onclick=showSelectedPassword() type="button" style="height:40px; width:300px;">Show Selected Password</button>
+        <input type="text" id="webpageShow" name="webpageShow" value=""><br>
+        <div id="showpasswordselected">
+            <h3>Username/Email: </h3>
+            <d id=usernameOutput style="display:none"></d><br>
+            <h3>Password: </h3>
+            <d id=passwordOutput style="display:none"></d><br>
+        </div>
+        <div id="tablepasswords">
+        <table id="table" border="1" style="width: 100%; display:none;">
+            <tr>
+                <th style="width: 75px;">Website</th>
+                <th style="width: 75px;">Username</th>
+                <th style="width: 75px">Password</th>
+            </tr>
+        </table>
+        </div>
+        </div>
+    </div>
 </body>
 </html>
