@@ -31,14 +31,13 @@ async function createAccount() {
     document.getElementById("loginWindow").style.display = "inline";
 }
 
-function openShowPassword() {
-    if (document.getElementById('showPasswordWindow').style.display = "none") {
-        document.getElementById('showPasswordWindow').style.display = "block";
-    } else if (document.getElementById('showPasswordWindow').style.display = "block") {
-        document.getElementById('showPasswordWindow').style.display = "none";
+function openWindow(partOfSite) {
+    if (document.getElementById(partOfSite).style.display == "none") {
+        document.getElementById(partOfSite).style.display = "block";
+    } else if (document.getElementById(partOfSite).style.display == "block") {
+        document.getElementById(partOfSite).style.display = "none";
     }
 }
-
 async function login() {
     var usernameInputted = document.getElementById("login-username").value;
     var passwordInputted = document.getElementById("login-password").value;
@@ -294,17 +293,6 @@ function changeBGColour(colour) {
     document.body.style.background = colour;
 }
 
-async function keyGenerationForEncryption() {
-    var key = await crypto.subtle.generateKey(
-        {
-            name: "AES-GCM",
-            length: 256,
-        },
-        true,
-        ["encrypt","decrypt"]
-    );
-    return key;
-}
 async function keyDeriveFromPassword(password) {
     const buffer = new TextEncoder().encode(password);
     const salt = new TextEncoder().encode("mysalt");

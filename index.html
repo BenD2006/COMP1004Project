@@ -21,12 +21,12 @@
     </div>
 
     <button type="button" class="savePasswordButton" onclick=callDecryption()>Test</button>
-    <button type="button" class="savePasswordButton" onclick="document.getElementById('savePasswordWindow').style.display='block'">Save Password To Storage</button>
-    <button type="button" class="editPasswordButton" onclick="document.getElementById('editPasswordWindow').style.display='block'">Edit a Password</button>
-    <button type="button" class="deletePasswordButton" onclick="document.getElementById('deletePasswordWindow').style.display='block'">Delete Password From Storage</button>
-    <button type="button" class="showPasswordButton" onclick=openShowPassword() >Show Passwords</button>
-    <button type="button" class="passwordGenerateButton" onclick="document.getElementById('generatepassword').style.display='block'" >Generate A Password</button>
-    <button type="button" class="checkUserPasswordButton" onclick="document.getElementById('checkuserpassword').style.display='block'" >Check a Password</button>
+    <button type="button" class="savePasswordButton" onclick="openWindow('savePasswordWindow');">Save Password To Storage</button>
+    <button type="button" class="editPasswordButton" onclick="openWindow('editPasswordWindow');">Edit a Password</button>
+    <button type="button" class="deletePasswordButton" onclick="openWindow('deletePasswordWindow');">Delete Password From Storage</button>
+    <button type="button" class="showPasswordButton" onclick="openWindow('showPasswordWindow');" >Show Passwords</button>
+    <button type="button" class="passwordGenerateButton" onclick="openWindow('generatepasswordWindow');" >Generate A Password</button>
+    <button type="button" class="checkUserPasswordButton" onclick="openWindow('checkuserpasswordWindow');" >Check a Password</button>
 
     <div id="loginWindow" class="modal">
       <h1>Welcome to the password management system</h1>
@@ -95,7 +95,7 @@
           </div>
       </div> 
 
-      <div id="editPasswordWindow" class="modal" style="display:none">
+      <div id="editPasswordWindow" class="showModal" style="display:none">
         <button id="editmodalclose" onclick="document.getElementById('editPasswordWindow').style.display = 'none'" type="button" >Close</button>
         <h2>Edit a Password</h2>
         <form class="saveModal-content" action="#">
@@ -117,7 +117,8 @@
           </div>
       </div> 
 
-    <div id="generatepassword" class="generatepassword" style="display:none;">
+    <div id="generatepasswordWindow" class="showModal" style="display:none;">
+        <button id="editmodalclose" onclick="document.getElementById('generatepasswordWindow').style.display = 'none'" type="button" >Close</button>
         <h2>Password Generator</h2>
         <form>
             <br><label for="numofchar">Number Of Characters: </label>
@@ -135,7 +136,8 @@
     </div>
 
 
-    <div id="checkuserpassword" class="checkuserpassword" style="display:none">
+    <div id="checkuserpasswordWindow" class="showModal" style="display:none">
+        <button id="editmodalclose" onclick="document.getElementById('checkuserpasswordWindow').style.display = 'none'" type="button" >Close</button>
         <h2>Check User Password</h2>
         <p>Use this to check if a password created meets the basic requirements of a good password</p>
         <form>
