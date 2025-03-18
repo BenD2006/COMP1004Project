@@ -150,6 +150,9 @@ async function showSelectedPassword() {
 }
 
 async function showAllPasswords() {
+    if (document.getElementById('table').style.display='inline') {
+        document.getElementById('table').innerHTML = '';
+    }
     document.getElementById('table').style.display='inline';
     var table = document.getElementById('table');
     for (i=0; i <= localStorage.length; i++) {
@@ -170,7 +173,6 @@ async function savePassword() {
     var websiteName = document.getElementById("webpage").value;
     var userName = document.getElementById("username").value;
     var passwordToStore = document.getElementById("password").value;
-    console.log("hi");
     credentialsToStore = [];
     await callEncryption(passwordToStore, websiteName);
     credentialsToStore.push({websiteName:websiteName, userName:userName, iv:passwordToStoreEncryptIV, encryptPass: passwordToStoreEncrypt});
@@ -370,7 +372,6 @@ async function callEncryption(data, website) {
     var website = website;
     var key = await keyDeriveFromPassword(website);
     await encryptAndStore(key, data, website);
-    console.log(passwordToStoreEncrypt);
 }
 
 async function callDecryption(website) {

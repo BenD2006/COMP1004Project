@@ -69,7 +69,9 @@
         <button type="button" class="checkUserPasswordButton" onclick="openWindow('checkuserpasswordWindow');">Check a Password</button>
     <h1 id = "main-title">PassGuard</h1>
     <div id="main-page">
+
         <div id="settingsWindow" class="showModal" style="display:none">
+            <button id="savemodalclose" onclick="document.getElementById('settingsWindow').style.display = 'none'" type="button" >Close</button>
             <h2>Settings Page</h2>
             <div class="dropdown">
                 <button class="dropbtn">Colour Menu</button>
@@ -178,9 +180,10 @@
         <button id="showmodalclose" onclick="document.getElementById('showPasswordWindow').style.display = 'none'">Exit</button>
         <h2>Show Passwords Saved</h2>
         <div id="showpasswords" class="showModalContent">
-        <button onclick=showAllPasswords() type="button" style="height:40px; width:300px;">Show All Passwords Saved</button>
+        <button onclick=showAllPasswords() type="button" style="height:40px; width:300px;">Show All Passwords Saved</button><br>
+        <b>To show a specific password, enter the website name below:</b>
+        <input type="text" id="webpageShow" name="webpageShow" placeholder="Enter Website Name Here: ">
         <button onclick=showSelectedPassword() type="button" style="height:40px; width:300px;">Show Selected Password</button>
-        <input type="text" id="webpageShow" name="webpageShow" value=""><br>
         <div id="showpasswordselected">
             <h3>Username/Email: </h3>
             <d id=usernameOutput style="display:none"></d><br>
