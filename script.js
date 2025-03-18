@@ -322,6 +322,7 @@ async function keyDeriveFromPassword(password) {
 
     return key;
 }
+
 async function encryptAndStore(encryption_key, data_to_encrypt, websiteName) {
     var data_encoded = new TextEncoder()
     var data = data_encoded.encode(data_to_encrypt);

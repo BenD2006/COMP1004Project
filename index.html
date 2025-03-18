@@ -7,84 +7,84 @@
 </head>
 <body class = "highlight">
 
-    <button type="button" class="logoutbutton" onclick=logout()>Log Out</button>
-    <button type="button" class="clearbutton" onclick=clearStorage()>Clear Storage</button>
-    <div class="dropdown">
-        <button class="dropbtn">Colour Menu</button>
-        <div class="dropcont">
-            <b onclick="changeBGColour('Blue')">Blue</b>
-            <b onclick="changeBGColour('red')">Red</b>
-            <b onclick="changeBGColour('green')">Green</b>
-            <b onclick="changeBGColour('white')">White</b>
-            <b onclick="changeBGColour('#d0e0ff')">Deafult</b>
-        </div>
-    </div>
-
-    <button type="button" class="savePasswordButton" onclick=callDecryption()>Test</button>
-    <button type="button" class="savePasswordButton" onclick="openWindow('savePasswordWindow');">Save Password To Storage</button>
-    <button type="button" class="editPasswordButton" onclick="openWindow('editPasswordWindow');">Edit a Password</button>
-    <button type="button" class="deletePasswordButton" onclick="openWindow('deletePasswordWindow');">Delete Password From Storage</button>
-    <button type="button" class="showPasswordButton" onclick="openWindow('showPasswordWindow');" >Show Passwords</button>
-    <button type="button" class="passwordGenerateButton" onclick="openWindow('generatepasswordWindow');" >Generate A Password</button>
-    <button type="button" class="checkUserPasswordButton" onclick="openWindow('checkuserpasswordWindow');" >Check a Password</button>
-
     <div id="loginWindow" class="modal">
-      <h1>Welcome to the password management system</h1>
-      <h2>Please Login using your username and password</h2>
-      <form class="modal-content" action="#">
-    
-        <div class="container">
-          <label for="login-username"><b>Username</b></label>
-          <input type="text" placeholder="" id="login-username" required> <br>
-    
-          <label for="login-password"><b>Password</b></label>
-          <input type="password" placeholder="" id="login-password" required>
-    
-          <br><br><button type="button" onclick=login() style="height: 40px; width: 300px;">Login</button>
-          <br><button type="button" onclick="document.getElementById('forgotpassword').style.display = 'block'" style = "height: 40px; width: 300px;">Forgot Password</button>
-          <br><button type="button" onclick=createAccountWindow() style="height: 40px; width: 300px;">Create Account</button>
-        </div>
-        <div id="createAccount" class="modal" style="display: none;">
-                <label for="login-username-new"><b>Create Username</b></label>
-                <input type="text" placeholder="" id="login-username-new" required> <br>
-    
-                <label for="login-password-new"><b>Create Password</b></label>
-                <input type="password" placeholder="" id="login-password-new" required>
-                <br><label for="sq1">Security Question 1 - What Primary School Did you attend? </label>
-                <input type="text" id="sq1-answer" required>
-                <br><label for="sq2">Security Question 2 - Set a security number (4 digits) ? </label>
-                <input type="text" id="sq2-answer" required>
-                <br><br><button type="button" onclick=createAccount() style="height: 40px; width: 300px;">Login</button>
-        </div>
-
-        <div id="forgotpassword" class="modal" style="display:none;">
-            <div id="questions">
-                <h2>Please answer the security questions</h2>
-                <br><label for="sq1">Security Question 1 - What Primary School Did you attend? </label>
-                <input type="text" id="sq1-answer-fg" required>
-                <br><label for="sq2">Security Question 2 - Set a security number (4 digits) ? </label>
-                <input type="text" id="sq2-answer-fg" required>
-                <br><button type="button" onclick=forgotPassword() style = "height: 40px; width: 300px;">Submit</button>
-            </div>
-            <div id="passreset" style="display: none;">
-                <label for="newpassword"> New Password</label>
-                <input type="password" id="newPass" required>
-                <br><button type="button" onclick=newPassword() style = "height: 40px; width: 300px;">Submit</button>
-            </div>
-        </div>
-      </form>
-    </div>
+        <h1>PassGuard</h1>
+        <h2>Please Login using your username and password</h2>
+        <form class="modal-content" action="#">
+      
+          <div class="container">
+            <label for="login-username"><b>Username</b></label>
+            <input type="text" placeholder="" id="login-username" required> <br>
+      
+            <label for="login-password"><b>Password</b></label>
+            <input type="password" placeholder="" id="login-password" required>
+      
+            <br><br><button type="button" onclick=login() style="height: 40px; width: 300px;">Login</button>
+            <br><button type="button" onclick="document.getElementById('forgotpassword').style.display = 'block'" style = "height: 40px; width: 300px;">Forgot Password</button>
+            <br><button type="button" onclick=createAccountWindow() style="height: 40px; width: 300px;">Create Account</button>
+          </div>
+          <div id="createAccount" class="modal" style="display: none;">
+            <button id="forgotmodalclose" onclick="document.getElementById('createAccount').style.display = 'none'" type="button" style="position:absolute; right:30px; top:10px;" >Close</button>
+                  <label for="login-username-new"><b>Create Username</b></label>
+                  <input type="text" placeholder="" id="login-username-new" required> <br>
+      
+                  <label for="login-password-new"><b>Create Password</b></label>
+                  <input type="password" placeholder="" id="login-password-new" required>
+                  <br><label for="sq1">Security Question 1 - What Primary School Did you attend? </label>
+                  <input type="text" id="sq1-answer" required>
+                  <br><label for="sq2">Security Question 2 - Set a security number (4 digits) ? </label>
+                  <input type="text" id="sq2-answer" required>
+                  <br><br><button type="button" onclick=createAccount() style="height: 40px; width: 300px;">Login</button>
+          </div>
+  
+          <div id="forgotpassword" class="modal" style="display:none;">
+            <button id="forgotmodalclose" onclick="document.getElementById('forgotpassword').style.display = 'none'" type="button" style="position:absolute; right:30px; top:10px;" >Close</button>
+              <div id="questions">
+                  <h2>Please answer the security questions</h2>
+                  <br><label for="sq1">Security Question 1 - What Primary School Did you attend? </label>
+                  <input type="text" id="sq1-answer-fg" required>
+                  <br><label for="sq2">Security Question 2 - Set a security number (4 digits) ? </label>
+                  <input type="text" id="sq2-answer-fg" required>
+                  <br><button type="button" onclick=forgotPassword() style = "height: 40px; width: 300px;">Submit</button>
+              </div>
+              <div id="passreset" style="display: none;">
+                  <label for="newpassword"> New Password</label>
+                  <input type="password" id="newPass" required>
+                  <br><button type="button" onclick=newPassword() style = "height: 40px; width: 300px;">Submit</button>
+              </div>
+          </div>
+        </form>
+      </div>
 
 
     <div id="page" style="display:none;">
-    <h1 id = "main-title">Welcome to the password management system</h1>
+        <button type="button" class="logoutbutton" onclick=logout()>Log Out</button>
+        <button type="button" class="clearbutton" onclick=clearStorage()>Clear Storage</button>
+        <button type="button" class="settingsbutton" onclick="openWindow('settingsWindow');">Settings</button>
+        <button type="button" class="savePasswordButton" onclick="openWindow('savePasswordWindow');">Save Password To Storage</button>
+        <button type="button" class="editPasswordButton" onclick="openWindow('editPasswordWindow');">Edit a Password</button>
+        <button type="button" class="deletePasswordButton" onclick="openWindow('deletePasswordWindow');">Delete Password From Storage</button>
+        <button type="button" class="showPasswordButton" onclick="openWindow('showPasswordWindow');">Show Passwords</button>
+        <button type="button" class="passwordGenerateButton" onclick="openWindow('generatepasswordWindow');">Generate A Password</button>
+        <button type="button" class="checkUserPasswordButton" onclick="openWindow('checkuserpasswordWindow');">Check a Password</button>
+    <h1 id = "main-title">PassGuard</h1>
     <div id="main-page">
-    <div style="margin-bottom: 0px;">
-        <p>This system will allow you to save and generate passwords for any websites you use.</p>
-    </div>
+        <div id="settingsWindow" class="showModal" style="display:none">
+            <h2>Settings Page</h2>
+            <div class="dropdown">
+                <button class="dropbtn">Colour Menu</button>
+                <div class="dropcont">
+                    <b onclick="changeBGColour('Blue')">Blue</b>
+                    <b onclick="changeBGColour('red')">Red</b>
+                    <b onclick="changeBGColour('green')">Green</b>
+                    <b onclick="changeBGColour('white')">White</b>
+                    <b onclick="changeBGColour('#d0e0ff')">Deafult</b>
+                </div>
+            </div>
+        </div>
 
     <div id="deletePasswordWindow" class="saveModal" style="display:none">
-        <button id="deletemodalclose" onclick="document.getElementById('deletePasswordWindow').style.display = 'none'" type="button" >Close</button>
+        <button id="savemodalclose" onclick="document.getElementById('deletePasswordWindow').style.display = 'none'" type="button" >Close</button>
         <h2>Delete Password from Password Storage</h2>
         <form class="saveModal-content" action="#">
                 <label for="webpage">Webpage Name:</label> <br>
@@ -96,7 +96,7 @@
       </div> 
 
       <div id="editPasswordWindow" class="showModal" style="display:none">
-        <button id="editmodalclose" onclick="document.getElementById('editPasswordWindow').style.display = 'none'" type="button" >Close</button>
+        <button id="savemodalclose" onclick="document.getElementById('editPasswordWindow').style.display = 'none'" type="button" >Close</button>
         <h2>Edit a Password</h2>
         <form class="saveModal-content" action="#">
                 <button onclick="document.getElementById('userformpart').style.display = 'inline'" type="button">Change Username</button>
@@ -118,7 +118,7 @@
       </div> 
 
     <div id="generatepasswordWindow" class="showModal" style="display:none;">
-        <button id="editmodalclose" onclick="document.getElementById('generatepasswordWindow').style.display = 'none'" type="button" >Close</button>
+        <button id="savemodalclose" onclick="document.getElementById('generatepasswordWindow').style.display = 'none'" type="button" >Close</button>
         <h2>Password Generator</h2>
         <form>
             <br><label for="numofchar">Number Of Characters: </label>
@@ -137,7 +137,7 @@
 
 
     <div id="checkuserpasswordWindow" class="showModal" style="display:none">
-        <button id="editmodalclose" onclick="document.getElementById('checkuserpasswordWindow').style.display = 'none'" type="button" >Close</button>
+        <button id="savemodalclose" onclick="document.getElementById('checkuserpasswordWindow').style.display = 'none'" type="button" >Close</button>
         <h2>Check User Password</h2>
         <p>Use this to check if a password created meets the basic requirements of a good password</p>
         <form>
