@@ -60,14 +60,16 @@
     <div id="page" style="display:none;">
         <button type="button" class="logoutbutton" onclick=logout()>Log Out</button>
         <button type="button" class="clearbutton" onclick=clearStorage()>Clear Storage</button>
+        <label id="menuLabel">Main Menu:</label> <br>
         <button type="button" class="settingsbutton" onclick="openWindow('settingsWindow');">Settings</button>
-        <button type="button" class="savePasswordButton" onclick="openWindow('savePasswordWindow');">Save Password To Storage</button>
-        <button type="button" class="editPasswordButton" onclick="openWindow('editPasswordWindow');">Edit a Password</button>
-        <button type="button" class="deletePasswordButton" onclick="openWindow('deletePasswordWindow');">Delete Password From Storage</button>
-        <button type="button" class="showPasswordButton" onclick="openWindow('showPasswordWindow');">Show Passwords</button>
-        <button type="button" class="passwordGenerateButton" onclick="openWindow('generatepasswordWindow');">Generate A Password</button>
-        <button type="button" class="checkUserPasswordButton" onclick="openWindow('checkuserpasswordWindow');">Check a Password</button>
+        <button type="button" class="savePasswordButton" onclick="openWindow('savePasswordWindow');">Save</button>
+        <button type="button" class="editPasswordButton" onclick="openWindow('editPasswordWindow');">Edit</button>
+        <button type="button" class="deletePasswordButton" onclick="openWindow('deletePasswordWindow');">Delete</button>
+        <button type="button" class="showPasswordButton" onclick="openWindow('showPasswordWindow');">Show</button>
+        <button type="button" class="passwordGenerateButton" onclick="openWindow('generatepasswordWindow');">Generate</button>
+        <button type="button" class="checkUserPasswordButton" onclick="openWindow('checkuserpasswordWindow');">Check</button>
     <h1 id = "main-title">PassGuard</h1>
+    <h3 id="subtitle">Please select a menu function from the menu</h3>
     <div id="main-page">
 
         <div id="settingsWindow" class="showModal" style="display:none">
@@ -82,6 +84,7 @@
                     <b onclick="changeBGColour('white')">White</b>
                     <b onclick="changeBGColour('#d0e0ff')">Deafult</b>
                 </div>
+                <button id="darkLightModeToggle" onclick="themeToggle();">Dark/Light Mode</button>
             </div>
         </div>
 

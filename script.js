@@ -295,6 +295,10 @@ function changeBGColour(colour) {
     document.body.style.background = colour;
 }
 
+function themeToggle() {
+    document.body.classList.toggle('dark-mode');
+}
+
 async function keyDeriveFromPassword(password) {
     const buffer = new TextEncoder().encode(password);
     const salt = new TextEncoder().encode("mysalt");

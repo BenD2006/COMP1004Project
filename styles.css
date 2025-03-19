@@ -16,7 +16,10 @@ h1 {
     font-size: 2.6em;
     text-align: center;
 }
-
+#subtitle {
+    font-family: "Verdana";
+    text-align: center;
+}
 h2 {
     font-family: "Verdana";
     text-align:center;
@@ -26,6 +29,11 @@ h2 {
 background-color: #d0e0ff;
 padding: 10px;
 }
+
+.dark-mode {
+    background-color: black;
+    color: lightblue;
+  }
 
 div.tablepasswords {
     top:100px;
@@ -103,10 +111,14 @@ button:hover {
     width: 150px;
 }
 
+#menuLabel {
+    font-family: Verdana;
+}
+
 .modal {
     display: inline;
     position: fixed;
-    z-index: 1;
+    z-index: auto;
     left: 0;
     top: 0;
     width: 100%;
@@ -128,7 +140,7 @@ button:hover {
   .saveModal {
     display: inline;
     position: absolute;
-    z-index: 1;
+    z-index: auto;
     left: 50%;
     top: 50%;
     transform: translate(-50%, -50%);
@@ -154,9 +166,9 @@ button:hover {
 }
 
 div.showModal {
-    display: inline;
+    display: block;
     position: absolute;
-    z-index: 1;
+    z-index: auto;
     left: 50%;
     top: 50%;
     transform: translate(-50%, -50%);
