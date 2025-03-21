@@ -1,9 +1,3 @@
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    }
-
 p, a {
 color: black;
 font-family: "Verdana";
@@ -24,15 +18,12 @@ h2 {
     font-family: "Verdana";
     text-align:center;
 }
-    
-.highlight {
-background-color: #d0e0ff;
-padding: 10px;
-}
 
-.dark-mode {
-    background-color: black;
-    color: lightblue;
+
+body {
+    padding: 15px;
+    background-color: #d0e0ff;
+    color: black;
   }
 
 div.tablepasswords {
@@ -61,7 +52,7 @@ div.tablepasswords {
 font-family: "Verdana";
 color:black;
 }
-    
+
 .login-box {
     max-width: 250px;
     margin: 0 auto;
@@ -136,35 +127,6 @@ button:hover {
     padding-bottom: 20px;
   }
   
-
-  .saveModal {
-    display: inline;
-    position: absolute;
-    z-index: auto;
-    left: 50%;
-    top: 50%;
-    transform: translate(-50%, -50%);
-    width: 60%;
-    height: 50%;
-    overflow: auto;
-    background-color: #ffffff;
-    padding-top: 30px;
-    font-family: Verdana;
-  }
-  
-  .saveModal-content {
-    margin: 10px;
-    width: 40%;
-    text-align: left;
-    padding-bottom: 10px;
-  }
-  
-#savemodalclose {
-    position:absolute;
-    top:10px;
-    right:10px;
-}
-
 div.showModal {
     display: block;
     position: absolute;
@@ -173,7 +135,7 @@ div.showModal {
     top: 50%;
     transform: translate(-50%, -50%);
     width: 60%;
-    height: 50%;
+    height: 60%;
     overflow: auto;
     background-color: #ffffff;
     padding-top: 30px;
@@ -192,35 +154,3 @@ div.showModal {
     top:10px;
     right:10px;
 }
-
-
-.dropbtn {
-    cursor:pointer;
-}
-.dropdown {
-    position:relative;
-    display:inline-block;
-}
-.dropcont {
-    display: none;
-    position: absolute;
-    background-color: #f9f9f9;
-    min-width: 160px;
-    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-    z-index: 1;
-}
-.dropcont b {
-    color: black;
-    padding: 12px 16px;
-    display: block;
-  }
-  
-.dropcont b:hover {background-color: #f1f1f1}
-  
-.dropdown:hover .dropcont {
-    display: block;
-  }
-.dropcont:hover .dropbtn {
-    background-color: #3e8e41;
-  }
-  

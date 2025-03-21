@@ -19,6 +19,12 @@ async function createAccount() {
     document.getElementById("loginWindow").style.display = "none";
     let usernameInputted = document.getElementById("login-username-new").value;
     let passwordInputted = document.getElementById("login-password-new").value;
+    if (passwordInputted.length < 8) {
+        alert("Password Doesn't Meet Requirements");
+        document.getElementById("loginWindow").style.display = "inline";
+        return;
+       
+    }
     let q1ans = document.getElementById("sq1-answer").value;
     let q2ans = document.getElementById("sq2-answer").value;
     let loginCredentials = [];
@@ -55,6 +61,7 @@ async function login() {
     if (usernameCorrect == true && passwordCorrect == true) {
         document.getElementById("loginWindow").style.display = "none";
         document.getElementById("page").style.display = "inline";
+        document.getElementById("menuRight").style.display = "inline";
     } else {
         alert("Either your username or password is incorrect, please try again");
     }
@@ -62,6 +69,7 @@ async function login() {
 
 function logout() {
     document.getElementById('loginWindow').style.display='block';
+    document.getElementById('menuRight').style.display = 'none';
 }
 function forgotPassword() {
     let resetFlag = false;
@@ -169,6 +177,7 @@ async function showAllPasswords() {
         cellc.innerHTML = password
     }
 }
+
 async function savePassword() {
     var websiteName = document.getElementById("webpage").value;
     var userName = document.getElementById("username").value;
@@ -297,6 +306,7 @@ function changeBGColour(colour) {
 
 function themeToggle() {
     document.body.classList.toggle('dark-mode');
+    document.body.classList.toggle('showModalDarkMode');
 }
 
 async function keyDeriveFromPassword(password) {

@@ -58,10 +58,12 @@
 
 
     <div id="page" style="display:none;">
-        <button type="button" class="logoutbutton" onclick=logout()>Log Out</button>
-        <button type="button" class="clearbutton" onclick=clearStorage()>Clear Storage</button>
+        <div id="menuRight">
+            <button type="button" class="logoutbutton" onclick=logout()>Log Out</button>
+            <button type="button" class="clearbutton" onclick=clearStorage()>Clear Storage</button>
+            <button type="button" class="settingsbutton" onclick="openWindow('settingsWindow');">Settings</button>
+        </div>
         <label id="menuLabel">Main Menu:</label> <br>
-        <button type="button" class="settingsbutton" onclick="openWindow('settingsWindow');">Settings</button>
         <button type="button" class="savePasswordButton" onclick="openWindow('savePasswordWindow');">Save</button>
         <button type="button" class="editPasswordButton" onclick="openWindow('editPasswordWindow');">Edit</button>
         <button type="button" class="deletePasswordButton" onclick="openWindow('deletePasswordWindow');">Delete</button>
@@ -75,20 +77,15 @@
         <div id="settingsWindow" class="showModal" style="display:none">
             <button id="savemodalclose" onclick="document.getElementById('settingsWindow').style.display = 'none'" type="button" >Close</button>
             <h2>Settings Page</h2>
-            <div class="dropdown">
-                <button class="dropbtn">Colour Menu</button>
-                <div class="dropcont">
-                    <b onclick="changeBGColour('Blue')">Blue</b>
-                    <b onclick="changeBGColour('red')">Red</b>
-                    <b onclick="changeBGColour('green')">Green</b>
-                    <b onclick="changeBGColour('white')">White</b>
-                    <b onclick="changeBGColour('#d0e0ff')">Deafult</b>
-                </div>
-                <button id="darkLightModeToggle" onclick="themeToggle();">Dark/Light Mode</button>
-            </div>
+            <h3>Background Colour Menu</h3>
+            <button onclick="changeBGColour('Blue')" style="width: 150px;">Blue</button>
+            <button onclick="changeBGColour('red')" style="width: 150px;">Red</button>
+            <button onclick="changeBGColour('green')" style="width: 150px;">Green</button>
+            <button onclick="changeBGColour('white')" style="width: 150px;">White</button>
+            <button onclick="changeBGColour('#d0e0ff')"style="width: 150px;">Deafult</button>
         </div>
 
-    <div id="deletePasswordWindow" class="saveModal" style="display:none">
+    <div id="deletePasswordWindow" class="showModal" style="display:none">
         <button id="savemodalclose" onclick="document.getElementById('deletePasswordWindow').style.display = 'none'" type="button" >Close</button>
         <h2>Delete Password from Password Storage</h2>
         <form class="saveModal-content" action="#">
@@ -164,7 +161,7 @@
 
     </div>
 
-    <div id="savePasswordWindow" class="saveModal" style="display:none">
+    <div id="savePasswordWindow" class="showModal" style="display:none">
         <button id="savemodalclose" onclick="document.getElementById('savePasswordWindow').style.display = 'none'" type="button">Close</button>
         <h2>Save Password to Password Storage</h2>
         <form class="saveModal-content" action="#"> 
@@ -173,7 +170,7 @@
                 <label for="username">Username/Email:</label><br>
                 <input type="text" id="username" name="username" value="" style="width: 500px; height:25px;"><br><br>
                 <label for="password">Password:</label><br>
-                <input type="password" id="password" name="password" value="" style="width: 500px; height:25px;"><br><br><br>
+                <input type="password" id="password" name="password" value="" style="width: 500px; height:25px;"><br><br>
                 <button onclick= savePassword() type="button" style="height: 40px; width: 500px;">Submit</button>
             </form>
               
