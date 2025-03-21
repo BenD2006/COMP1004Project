@@ -194,6 +194,7 @@ function deletePassword() {
     var websiteName = document.getElementById("deletewebpage").value;
     if (localStorage.getItem(websiteName) != null) {
         localStorage.removeItem(websiteName);
+        alert("Password Deleted");
     } else {
         alert("Not a valid username for a password that is stored");
     }
