@@ -26,4 +26,4 @@ This project final website is a basic password manager, utilising local storage 
        - Upper and Lower Case Characters
        - Numbers
        - Special Characters
-  - If the password meets these requirements, the user is told the password is a good password, and can then save it using the above methods.
+     If the password meets these requirements, the user is told the password is a good password, and can then save it using the above methods.
