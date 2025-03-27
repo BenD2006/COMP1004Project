@@ -21,9 +21,12 @@ This project final website is a basic password manager, utilising local storage 
    - The password is then generated using a fixed set of characters to meet these requirements, and outputted on the main site.
   
 6. Checking of a password:
-   - Finally, the user has the option to input a password that they have made, and the program checks it against the basic password requirements
+   - Finally, the user has the option to input a password that they have made, and the program checks it against the basic password requirements. If the password meets these requirements, the user is told the password is a good password, and can then save it using the above methods. The basic requirements are:
        - 8 Characters
        - Upper and Lower Case Characters
        - Numbers
        - Special Characters
-     If the password meets these requirements, the user is told the password is a good password, and can then save it using the above methods.
+
+In order to use the site, a master username and password must be created, alongisde answering 2 recovery questions which are used if the password is forgotten to reset it. Once this is done, the user can login and utilise all the other features documented above. Once logged in, all passwords can be accessed. The data can be all cleared if necessary using the clear storage button located in the top right of the software. 
+
+The settings page can be used to change the background colour of the pages, allowing the page to be accessible to all. This can once again be accessed using the button in the top right of the software. 
