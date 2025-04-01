@@ -31,7 +31,7 @@ async function createAccount() {
     await callEncryption(passwordInputted, "loginUser");
     let pIv = passwordToStoreEncryptIV;
     let pEnc = passwordToStoreEncrypt;
-    loginCredentials.push({websiteName:"pms", userName:usernameInputted, iv:pIv, encryptPass:pEnc, q1ans:q1ans, q2ans:q2ans});
+    loginCredentials.push({websiteName:"loginUser", userName:usernameInputted, iv:pIv, encryptPass:pEnc, q1ans:q1ans, q2ans:q2ans});
     localStorage.setItem("loginUser", JSON.stringify(loginCredentials));
     document.getElementById("createAccount").style.display = "none";
     document.getElementById("loginWindow").style.display = "inline";
@@ -163,7 +163,7 @@ async function showAllPasswords() {
     }
     document.getElementById('table').style.display='inline';
     var table = document.getElementById('table');
-    for (i=0; i <= localStorage.length; i++) {
+    for (i=0; i <= localStorage.length - 1; i++) {
         var key = localStorage.key(i);
         var data = localStorage.getItem(key);
         var dataParsed = JSON.parse(data);
