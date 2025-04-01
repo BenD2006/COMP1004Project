@@ -103,6 +103,8 @@ function forgotPassword() {
     }
 
 }
+
+// Function called using the reset password function to create a new password for the account
 async function newPassword() {
     let passwordInputtedNew = document.getElementById("newPass").value;
     let credentials = localStorage.getItem("loginUser");
@@ -118,6 +120,7 @@ async function newPassword() {
     document.getElementById("menuRight").style.display = "inline";
 
 }
+// Function used to generate the user a new password using the requirements set
 function generatePassword() {
     const baseChars = "abcdefghijklmnopqrstuvwxyz";
     var charsToUse = "abcdefghijklmnopqrstuvwxyz";
@@ -152,6 +155,7 @@ function generatePassword() {
     }
 }
 
+// Function used to show a selected password from local storage
 async function showSelectedPassword() {
     try{
         var websiteName = document.getElementById("webpageShow").value;
@@ -174,6 +178,7 @@ async function showSelectedPassword() {
     }
 }
 
+// Function used to show all passwords saved in local storage
 async function showAllPasswords() {
     document.getElementById("loginWindow").style.display = "block";
     if (document.getElementById('table').style.display='inline') {
@@ -196,6 +201,7 @@ async function showAllPasswords() {
     }
 }
 
+// Function used to save one of the users passwords into local storage
 async function savePassword() {
     var websiteName = document.getElementById("webpage").value;
     var userName = document.getElementById("username").value;
@@ -208,6 +214,7 @@ async function savePassword() {
     document.getElementById("savePasswordWindow").style.display = "none";
 }
 
+// Function used to delete a password from local storage
 function deletePassword() {
     var websiteName = document.getElementById("deletewebpage").value;
     if (localStorage.getItem(websiteName) != null) {
@@ -218,6 +225,7 @@ function deletePassword() {
     }
 }
 
+// Function to edit a password of the users choice in local storage
 async function editPassword() {
     let websiteName = document.getElementById("editwebpage").value;
     let usernameEdit = document.getElementById("editusername").value;
@@ -256,10 +264,12 @@ async function editPassword() {
     document.getElementById('editPasswordWindow').style.display='none'
 }
 
+// Small function used to clear all data in local storage
 function clearStorage() {
     localStorage.clear();
 }
 
+// Function used to check the password the user enters in the check function
 passwordInputted.onkeyup = function validatePassword() {
     var length = passwordInputted.value.length;
     var lengthVal = false;
@@ -319,15 +329,12 @@ passwordInputted.onkeyup = function validatePassword() {
     }
 }
 
+// Function used to change the background colour
 function changeBGColour(colour) {
     document.body.style.background = colour;
 }
 
-function themeToggle() {
-    document.body.classList.toggle('dark-mode');
-    document.body.classList.toggle('showModalDarkMode');
-}
-
+// Function to derive the key
 async function keyDeriveFromPassword(password) {
     const buffer = new TextEncoder().encode(password);
     const salt = new TextEncoder().encode("mysalt");
@@ -358,6 +365,7 @@ async function keyDeriveFromPassword(password) {
     return key;
 }
 
+// Function used to encrypt the data
 async function encryptAndStore(encryption_key, data_to_encrypt, websiteName) {
     var data_encoded = new TextEncoder()
     var data = data_encoded.encode(data_to_encrypt);
@@ -374,6 +382,7 @@ async function encryptAndStore(encryption_key, data_to_encrypt, websiteName) {
     passwordToStoreEncrypt = Array.from(new Uint8Array(data_encrypted))
 }
 
+// Function used to decrypt the data
 async function decryptFromStore(key, website) {
     try {
         var encrypted_data_string = localStorage.getItem(website);
@@ -399,6 +408,7 @@ async function decryptFromStore(key, website) {
         console.error("ERROR OCCURED ", error);
     }
 }
+
 
 async function callEncryption(data, website) {
     var data = data;
