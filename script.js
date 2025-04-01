@@ -7,6 +7,7 @@ var credentialsToStore = [];
 var passwordToStoreEncryptIV;
 var passwordToStoreEncrypt;
 
+// Function created to make the new account window and check if user account already exists
 function createAccountWindow() {
     if (localStorage.getItem("loginUser") != ''){
         document.getElementById("createAccount").style.display = "inline";
@@ -15,6 +16,7 @@ function createAccountWindow() {
     }
 }
 
+// Asynchronous function used to create a new account and get all data from the user, then stores to local storage.
 async function createAccount() {
     document.getElementById("loginWindow").style.display = "none";
     let usernameInputted = document.getElementById("login-username-new").value;
@@ -37,6 +39,7 @@ async function createAccount() {
     document.getElementById("loginWindow").style.display = "inline";
 }
 
+// Function used to open a part of the site using a parameter of the site part id
 function openWindow(partOfSite) {
     if (document.getElementById(partOfSite).style.display == "none") {
         document.getElementById(partOfSite).style.display = "block";
@@ -44,6 +47,8 @@ function openWindow(partOfSite) {
         document.getElementById(partOfSite).style.display = "none";
     }
 }
+
+// Function used to authenticate the user into the site using the entered username and password, and the local storage data.
 async function login() {
     var usernameInputted = document.getElementById("login-username").value;
     var passwordInputted = document.getElementById("login-password").value;
@@ -67,20 +72,30 @@ async function login() {
     }
 }
 
+// Function used to log out the user by clearing the screen and showing the log in page
 function logout() {
     document.getElementById('loginWindow').style.display='block';
     document.getElementById('menuRight').style.display = 'none';
 }
+
+// Function used if the user forgets their password, asking for the security question answers and setting a new password
 function forgotPassword() {
     let resetFlag = false;
     let q1ansNew = document.getElementById("sq1-answer-fg").value;
     let q2ansNew = document.getElementById("sq2-answer-fg").value;
     let credentials = localStorage.getItem("loginUser");
     let unstringCredentials = JSON.parse(credentials);
+    if (credentials == null) {
+        alert("No user created");
+        document.getElementById("forgotpassword").style.display = "none";
+        return;
+    }
     let q1ans = unstringCredentials[0].q1ans;
     let q2ans = unstringCredentials[0].q2ans;
     if (q1ansNew == q1ans && q2ansNew == q2ans) {
         resetFlag = true;
+    } else {
+        alert("Wrong answers provided");
     }
     if (resetFlag == true) {
         document.getElementById("questions").style.display = "none";
@@ -160,6 +175,7 @@ async function showSelectedPassword() {
 }
 
 async function showAllPasswords() {
+    document.getElementById("loginWindow").style.display = "block";
     if (document.getElementById('table').style.display='inline') {
         document.getElementById('table').innerHTML = '';
     }

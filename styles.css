@@ -109,7 +109,7 @@ button:hover {
 .modal {
     display: inline;
     position: fixed;
-    z-index: auto;
+    z-index: 1;
     left: 0;
     top: 0;
     width: 100%;
