@@ -100,6 +100,8 @@ async function newPassword() {
     document.getElementById("loginWindow").style.display = "none";
     document.getElementById("forgotpassword").style.display = "none";
     document.getElementById("page").style.display = "inline";
+    document.getElementById("menuRight").style.display = "inline";
+
 }
 function generatePassword() {
     const baseChars = "abcdefghijklmnopqrstuvwxyz";
